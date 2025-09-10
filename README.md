@@ -13,3 +13,4 @@ npm run build
 npm run preview
 ```
 "# cylra" 
+"# clyra" 
