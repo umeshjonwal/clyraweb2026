@@ -23,7 +23,7 @@ export default function Contact() {
             id="name"
             type="text"
             name="name"
-            className="rounded-xl"
+            className="rounded-xl p-2 bg-white text-black dark:bg-gray-800 dark:text-white"
             placeholder="Your name"
             required
           />
@@ -36,7 +36,7 @@ export default function Contact() {
             id="email"
             type="email"
             name="email"
-            className="rounded-xl"
+            className="rounded-xl p-2 bg-white text-black dark:bg-gray-800 dark:text-white"
             placeholder="you@example.com"
             required
           />
@@ -45,7 +45,11 @@ export default function Contact() {
 
         <label className="grid gap-2">
           <span>Budget</span>
-          <select id="budget" name="budget" className="rounded-xl">
+          <select
+            id="budget"
+            name="budget"
+            className="rounded-xl p-2 bg-white text-black dark:bg-gray-800 dark:text-white"
+          >
             <option>₹50k–₹1L</option>
             <option>₹1L–₹3L</option>
             <option>₹3L+</option>
@@ -58,7 +62,7 @@ export default function Contact() {
             id="message"
             name="message"
             rows="4"
-            className="rounded-xl"
+            className="rounded-xl p-2 bg-white text-black dark:bg-gray-800 dark:text-white"
             placeholder="Tell us about your goals, timeline, and constraints."
             required
           />
