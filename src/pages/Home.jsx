@@ -88,43 +88,64 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+{/* Services highlights */}
+<section className="mt-20">
+  <div className="grid md:grid-cols-3 gap-6">
+    {[
+{
+  title: "AI-Driven Websites",
+  desc: "Smart, adaptive sites with AI assistants, personalization, and automation built in.",
+  img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+},
 
-      {/* Services highlights */}
-      <section className="mt-20">
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              title: "Brand Identity",
-              desc: "Logos, visual systems, and guidelines that scale without losing soul.",
-            },
-            {
-              title: "Web Design & Dev",
-              desc: "Headless, SEO-first websites — fast, accessible, and easy to edit.",
-            },
-            {
-              title: "Performance Marketing",
-              desc: "Full-funnel strategy with creative that converts and analytics that prove it.",
-            },
-            {
-              title: "AI Automation",
-              desc: "From lead routing to content ops — ship more with fewer clicks.",
-            },
-            {
-              title: "SEO & Content",
-              desc: "Topic maps, briefs, and publishing pipelines for compounding growth.",
-            },
-            {
-              title: "E-commerce",
-              desc: "Product storytelling, PDPs that sell, optimized checkouts.",
-            },
-          ].map((c, i) => (
-            <motion.div key={i} {...hoverLift} className="card">
-              <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{c.desc}</p>
-            </motion.div>
-          ))}
+      {
+        title: "Web Design & Dev",
+        desc: "Headless, SEO-first websites — fast, accessible, and easy to edit.",
+        img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        title: "Performance Marketing",
+        desc: "Full-funnel strategy with creative that converts and analytics that prove it.",
+        img: "https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=600&q=80",
+      },
+      {
+        title: "AI Automation",
+        desc: "From lead routing to content ops — ship more with fewer clicks.",
+        img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80",
+      },
+      
+{
+  title: "Content Systems",
+  desc: "Topic maps, briefs, and publishing pipelines for compounding growth.",
+  img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+}, 
+{
+  title: "E-commerce",
+  desc: "Product storytelling, PDPs that sell, optimized checkouts.",
+  img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80",
+},
+
+    ].map((c, i) => (
+      <motion.div
+        key={i}
+        {...hoverLift}
+        className="card overflow-hidden rounded-xl shadow-md bg-white dark:bg-gray-900"
+      >
+        {/* Image */}
+        <img
+          src={c.img}
+          alt={c.title}
+          className="w-full h-40 object-cover"
+        />
+        {/* Text */}
+        <div className="p-4">
+          <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
+          <p className="text-gray-600 dark:text-gray-400">{c.desc}</p>
         </div>
-      </section>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* Process */}
       <section className="mt-24">
