@@ -12,6 +12,7 @@ import BlogPost2 from "./blog/blog-digital-menus.jsx";
 import BlogPost3 from "./blog/blog-smart-billing.jsx";
 import MenuScanner from "./pages/MenuScanner.jsx";
 import GstBilling from "./pages/GstBilling.jsx";
+import ChatWidget from "./components/ChatWidget.jsx"; // ✅ new chatbot
 
 // 🌊 Rainbow / Fairy-tail water-like cursor
 function CursorWater() {
@@ -190,10 +191,10 @@ function CursorWater() {
 function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/919911274711" // 🔗 replace with your WhatsApp number
+      href="https://wa.me/919911274711"
       target="_blank"
       rel="noopener noreferrer"
-       className="fixed top-1/2 right-0 transform -translate-y-1/2 bg-green-500 text-white p-3 rounded-l-2xl shadow-lg hover:bg-green-600 transition z-50 flex items-center"
+      className="fixed top-1/2 right-0 transform -translate-y-1/2 bg-green-500 text-white p-3 rounded-l-2xl shadow-lg hover:bg-green-600 transition z-50 flex items-center"
     >
       {/* WhatsApp Logo (SVG) */}
       <svg
@@ -268,6 +269,9 @@ export default function App() {
 
       {/* ✅ Floating WhatsApp Chat */}
       <WhatsAppButton />
+
+      {/* ✅ Floating Clyra AI Chatbot */}
+      <ChatWidget />
 
       <Nav />
       <main className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
