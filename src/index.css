@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --radius: 1.25rem; }
+
+@layer base {
+  * { @apply antialiased; }
+  html, body, #root { height: 100%; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition shadow-sm hover:shadow; }
+  .btn-primary { @apply bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-ghost { @apply border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800; }
+  .badge { @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800; }
+  .card { @apply rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/70 backdrop-blur p-6 shadow-sm; }
+}
+
+/* Responsive table helper (stacks into cards on small screens) */
+.table-wrap { @apply w-full; }
+.table { @apply w-full text-left border-collapse hidden; } /* removed md:table */
+.table th, .table td { @apply p-3 border-b border-gray-200 dark:border-gray-800 align-top; }
+.table-cards { @apply grid gap-3; } /* removed md:hidden */
+.table-card { @apply card; }
+.table-card dt { @apply text-xs uppercase tracking-wide text-gray-500 mb-1; }
+.table-card dd { @apply text-sm text-gray-800 dark:text-gray-200; }
+
+/* Section reveal */
+.reveal { animation: rise .6s ease both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hover-3d {
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
