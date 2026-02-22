@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 
-// Updated to the high-performance Cloudinary link
-const CLYRA_AVATAR_URL = "https://res.cloudinary.com/douc8uat5/image/upload/v1771763391/imageclyra_v6truw.png";
+// Optimized Cloudinary link with auto-format, auto-quality, and specific width for performance
+const CLYRA_AVATAR_URL = "https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_120/v1771763391/imageclyra_v6truw.png";
 
 /* ────────────────────────────────────────────────────────────
-   Graq credentials
+    Graq credentials
    ──────────────────────────────────────────────────────────── */
 const GRAQ_API_URL = "https://api.graq.ai/v1/chat";
 const GRAQ_API_KEY = import.meta.env.VITE_GRAQ_API_KEY || "YOUR_GRAQ_API_KEY";
 
 /* ────────────────────────────────────────────────────────────
-   System prompt
+    System prompt
    ──────────────────────────────────────────────────────────── */
 const SYSTEM_PROMPT = `
 You are a professional, friendly, and knowledgeable support agent for Legit Global Agency website.
@@ -82,8 +82,10 @@ export default function ChatWidget() {
 
   /* ─── AUTO SCROLL ─── */
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, loading]);
+    if (isOpen) {
+      endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, loading, isOpen]);
 
   const fallbackAnswer = (q) => {
     const l = q.toLowerCase();
@@ -157,6 +159,9 @@ export default function ChatWidget() {
           src={CLYRA_AVATAR_URL} 
           className="w-12 h-12 rounded-full object-cover" 
           alt="Clyra AI Support Avatar" 
+          role="img"
+          width="48" 
+          height="48"
           loading="lazy"
         />
 
@@ -170,6 +175,7 @@ export default function ChatWidget() {
       {isOpen && (
         <div 
           role="dialog" 
+          aria-modal="true"
           aria-label="Chat Support Window"
           className="absolute bottom-20 right-0 w-[360px] bg-white rounded-xl shadow-2xl border border-gray-300 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300"
         >
@@ -180,6 +186,8 @@ export default function ChatWidget() {
               src={CLYRA_AVATAR_URL} 
               className="w-8 h-8 rounded-full object-cover border border-gray-200" 
               alt="Clyra Mini Avatar" 
+              width="32"
+              height="32"
             />
             <div>
               <h3 className="font-semibold text-gray-900 text-sm">Clyra Support</h3>
@@ -229,6 +237,7 @@ export default function ChatWidget() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
               placeholder="Type your message..."
+              aria-label="Chat input"
               className="flex-1 px-4 py-2 rounded-full border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all text-sm"
             />
             <button
@@ -243,6 +252,7 @@ export default function ChatWidget() {
                 stroke="currentColor" 
                 strokeWidth="2.5" 
                 className="w-4 h-4 rotate-45"
+                aria-hidden="true"
               >
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
               </svg>
