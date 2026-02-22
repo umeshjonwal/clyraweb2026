@@ -1,51 +1,51 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-7ZYTYHGX23"
-    ></script>
+    <link 
+      rel="preload" 
+      as="image" 
+      href="https://res.cloudinary.com/douc8uat5/image/upload/v1771763391/imageclyra_v6truw.png" 
+    />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7ZYTYHGX23"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag("js", new Date());
-      gtag("config", "G-7ZYTYHGX23", { 'track_performance': true });
-      gtag("config", "G-SYVGVW9HL5");
+      
+      // Delay non-critical tracking to improve TBT (Total Blocking Time)
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          gtag("config", "G-7ZYTYHGX23");
+          gtag("config", "G-SYVGVW9HL5");
+        }, 2500);
+      });
     </script>
 
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=5"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="theme-color" content="#020205" />
 
     <title>Clyraweb — Custom AI & Web Development Agency</title>
-    <meta
-      name="description"
-      content="Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups."
-    />
+    <meta name="description" content="Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups." />
     <link rel="canonical" href="https://clyraweb.netlify.app/" />
     <meta name="robots" content="index, follow" />
-    <meta
-      name="google-site-verification"
-      content="JKwC6RhXkiXwnkbKAZB2dS_t90qR5JvTLlWNrusFFH8"
-    />
+    <meta name="google-site-verification" content="JKwC6RhXkiXwnkbKAZB2dS_t90qR5JvTLlWNrusFFH8" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Clyraweb — Custom AI & Web Development Agency" />
-    <meta property="og:description" content="Custom AI-powered websites and software solutions." />
+    <meta property="og:description" content="Custom AI & Web Development Agency for modern startups." />
     <meta property="og:url" content="https://clyraweb.netlify.app/" />
-    <meta property="og:image" content="https://clyraweb.netlify.app/og-image.png" />
+    <meta property="og:site_name" content="Clyraweb" />
+    <meta property="og:image" content="https://res.cloudinary.com/douc8uat5/image/upload/v1771763391/imageclyra_v6truw.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Clyraweb — AI & Web Agency" />
-    <meta name="twitter:description" content="Weave the future with AI-integrated web ecosystems." />
+    <meta name="twitter:description" content="Building the future with AI-powered web solutions." />
 
     <script type="application/ld+json">
     {
@@ -53,30 +53,35 @@
       "@type": "Organization",
       "name": "Clyraweb",
       "url": "https://clyraweb.netlify.app/",
-      "logo": "https://clyraweb.netlify.app/public_favicon.svg",
+      "logo": "https://res.cloudinary.com/douc8uat5/image/upload/v1771763391/imageclyra_v6truw.png",
       "description": "Clyraweb is a custom digital agency building AI-powered websites and software.",
-      "foundingDate": "2024",
-      "areaServed": "Worldwide",
+      "foundingDate": "2025",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "New Delhi",
+        "addressCountry": "IN"
+      },
       "knowsAbout": [
         "AI Development",
-        "React Engineering",
-        "Spring Boot Backends",
-        "Full-Stack Applications"
+        "Web Development",
+        "Custom Software",
+        "Digital Strategy"
       ]
     }
     </script>
 
     <link rel="icon" href="/public_favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   </head>
 
   <body class="bg-white text-gray-900 dark:bg-[#020205] dark:text-gray-100">
-    <a href="#root" class="sr-only focus:not-sr-only">Skip to content</a>
+    <a href="#root" class="sr-only focus:not-sr-only p-4 bg-white text-black absolute z-[1000]">
+      Skip to content
+    </a>
 
     <noscript>
-      <div style="padding: 20px; text-align: center;">
-        <h1>Clyraweb</h1>
-        <p>This site requires JavaScript to render our high-fidelity experience.</p>
+      <div style="text-align: center; padding: 2rem;">
+        <h1>Clyraweb — Custom AI & Web Development Agency</h1>
+        <p>Please enable JavaScript to view this site correctly.</p>
       </div>
     </noscript>
 

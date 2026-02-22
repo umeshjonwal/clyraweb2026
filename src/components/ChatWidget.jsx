@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import clyraAvatar from "./imageclyra.png";
+
+// Updated to the high-performance Cloudinary link
+const CLYRA_AVATAR_URL = "https://res.cloudinary.com/douc8uat5/image/upload/v1771763391/imageclyra_v6truw.png";
 
 /* ────────────────────────────────────────────────────────────
    Graq credentials
@@ -148,9 +150,15 @@ export default function ChatWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative w-16 h-16 rounded-full bg-white border border-gray-300 shadow-lg flex items-center justify-center hover:scale-105 transition"
+        aria-label="Toggle Chat Support"
+        className="relative w-16 h-16 rounded-full bg-white border border-gray-300 shadow-lg flex items-center justify-center hover:scale-105 transition group"
       >
-        <img src={clyraAvatar} className="w-12 h-12 rounded-full" alt="Clyra" />
+        <img 
+          src={CLYRA_AVATAR_URL} 
+          className="w-12 h-12 rounded-full object-cover" 
+          alt="Clyra AI Support Avatar" 
+          loading="lazy"
+        />
 
         {/* ONLINE DOT */}
         <span className="absolute bottom-1 right-1 flex h-3 w-3">
@@ -160,35 +168,44 @@ export default function ChatWidget() {
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-20 right-0 w-[360px] bg-white rounded-xl shadow-2xl border border-gray-300 flex flex-col overflow-hidden">
+        <div 
+          role="dialog" 
+          aria-label="Chat Support Window"
+          className="absolute bottom-20 right-0 w-[360px] bg-white rounded-xl shadow-2xl border border-gray-300 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300"
+        >
           
           {/* Header */}
-          <div className="px-4 py-3 border-b border-gray-200 flex items-center gap-3">
-            <img src={clyraAvatar} className="w-8 h-8 rounded-full" alt="avatar" />
+          <div className="px-4 py-3 border-b border-gray-200 flex items-center gap-3 bg-gray-50/50">
+            <img 
+              src={CLYRA_AVATAR_URL} 
+              className="w-8 h-8 rounded-full object-cover border border-gray-200" 
+              alt="Clyra Mini Avatar" 
+            />
             <div>
-              <h3 className="font-semibold text-gray-900">Clyra Support</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">Clyra Support</h3>
               <div className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                <p className="text-xs text-gray-500">Online now</p>
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                <p className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Online now</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="ml-auto text-gray-400 hover:text-gray-700 text-xl"
+              aria-label="Close Chat"
+              className="ml-auto text-gray-400 hover:text-gray-700 text-2xl leading-none"
             >
               ×
             </button>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 space-y-3 overflow-y-auto text-sm bg-white">
+          <div className="flex-1 p-4 space-y-3 h-[380px] overflow-y-auto text-sm bg-white">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}>
                 <div
-                  className={`px-4 py-2 rounded-lg max-w-[80%] ${
+                  className={`px-4 py-2 rounded-2xl max-w-[85%] shadow-sm ${
                     m.sender === "user"
-                      ? "bg-gray-900 text-white"
-                      : "bg-gray-100 text-gray-900"
+                      ? "bg-gray-900 text-white rounded-tr-none"
+                      : "bg-gray-100 text-gray-900 rounded-tl-none border border-gray-200/50"
                   }`}
                 >
                   {m.text}
@@ -196,26 +213,39 @@ export default function ChatWidget() {
               </div>
             ))}
             {loading && (
-              <p className="text-xs text-gray-400 italic">Clyra is typing…</p>
+              <div className="flex justify-start">
+                <div className="bg-gray-100 px-4 py-2 rounded-2xl rounded-tl-none animate-pulse text-xs text-gray-400 italic">
+                  Clyra is typing…
+                </div>
+              </div>
             )}
             <div ref={endRef} />
           </div>
 
           {/* Input */}
-          <div className="p-3 border-t border-gray-200 flex gap-2 bg-white">
+          <div className="p-3 border-t border-gray-200 flex gap-2 bg-gray-50/30">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Ask about pricing, services…"
-              className="flex-1 px-3 py-2 rounded-md border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900"
+              placeholder="Type your message..."
+              className="flex-1 px-4 py-2 rounded-full border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all text-sm"
             />
             <button
               onClick={handleSend}
               disabled={loading}
-              className="px-4 py-2 rounded-md bg-gray-900 text-white font-medium hover:bg-black transition disabled:opacity-50"
+              className="w-10 h-10 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-black transition-all disabled:opacity-50 shadow-md"
+              aria-label="Send message"
             >
-              Send
+              <svg 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                className="w-4 h-4 rotate-45"
+              >
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
             </button>
           </div>
         </div>
