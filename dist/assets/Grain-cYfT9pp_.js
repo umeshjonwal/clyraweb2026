@@ -1,0 +1,2 @@
+import{r,j as i}from"./vendor-core-BDTUElHq.js";function u(){const t=r.useRef(null);return r.useEffect(()=>{const a=t.current;let e;const n=()=>{const s=Math.random()*100,o=Math.random()*100;a.style.backgroundPosition=`${s}% ${o}%`,e=requestAnimationFrame(n)};return n(),()=>cancelAnimationFrame(e)},[]),i.jsx("div",{ref:t,className:`fixed inset-0 z-20 pointer-events-none opacity-[0.035]\r
+      bg-[url('https://grainy-gradients.vercel.app/noise.svg')]`})}export{u as default};

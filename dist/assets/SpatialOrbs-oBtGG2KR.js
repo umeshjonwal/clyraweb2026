@@ -1,0 +1,3 @@
+import{j as s}from"./vendor-core-BDTUElHq.js";import{d as e,m as l}from"./vendor-motion-CKCbKqsj.js";function c({mood:t,audio:r,velocity:o}){const a=e(o,[-2e3,2e3],[-80,80]);return s.jsxs(s.Fragment,{children:[s.jsx(l.div,{style:{y:a,scale:1+r*.4,background:`hsla(${t.hue}, 80%, 55%, 0.12)`},className:`absolute -top-1/3 -left-1/4 w-[70%] h-[70%]\r
+        rounded-full blur-[160px] opacity-70`}),s.jsx(l.div,{style:{y:e(a,u=>-u),scale:1+r*.6,background:`hsla(${t.hue+30}, 90%, 60%, 0.14)`},className:`absolute bottom-0 right-0 w-[60%] h-[60%]\r
+        rounded-full blur-[180px] opacity-80`})]})}export{c as default};
