@@ -118,7 +118,7 @@ export default function Home({ theme }) {
             <motion.h1 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
               className={`text-7xl md:text-[8.5rem] font-black leading-[0.8] tracking-tighter mb-10 
                 ${isDark ? 'text-white' : 'text-slate-900'}`}
             >
@@ -134,7 +134,6 @@ export default function Home({ theme }) {
             </p>
             <button 
               onClick={scrollToContact}
-              aria-label="Initialize Project"
               className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 transition-all"
             >
               Initialize Project
@@ -144,25 +143,19 @@ export default function Home({ theme }) {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video 
-                    autoPlay muted loop playsInline preload="none"
-                    className="w-full h-full object-cover opacity-60"
-                  >
+                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                  <h2 className="text-4xl font-black text-white mb-2">Primary Core</h2>
+                  <h3 className="text-4xl font-black text-white mb-2">Primary Core</h3>
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500">Neural Architecture</p>
                 </div>
             </SpatialCard>
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video 
-                    autoPlay muted loop playsInline preload="none"
-                    className="w-full h-full object-cover opacity-60"
-                  >
+                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
                      <source src="https://res.cloudinary.com/douc8uat5/video/upload/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -182,24 +175,22 @@ export default function Home({ theme }) {
         <h2 className={`text-6xl font-black tracking-tighter mb-20 ${isDark ? 'text-white' : 'text-slate-900'}`}>The Archives.</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {workHighlights.map((project, i) => (
-            <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group" aria-label={`View ${project.name}`}>
+            <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group">
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
                   <img 
                     src={project.img} 
                     alt={project.name} 
-                    loading="lazy"
-                    decoding="async"
-                    width="453"
-                    height="255"
+                    loading="lazy" 
+                    decoding="async" 
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
                   />
                 </div>
                 <div className="p-8">
                   <Globe size={20} className="mb-4 text-blue-500" />
                   <h4 className={`text-xl font-black mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.name}</h4>
-                  <p className={`text-[9px] font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{project.tag}</p>
+                  <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{project.tag}</p>
                 </div>
               </div>
             </a>
@@ -220,7 +211,7 @@ export default function Home({ theme }) {
             animate={{ x: ["0%", "-50%"] }}
             transition={{ 
               ease: "linear", 
-              duration: 35, // Slower for readability and better TBT
+              duration: 35, // Slowed down for readability and performance
               repeat: Infinity 
             }}
           >
@@ -235,9 +226,8 @@ export default function Home({ theme }) {
                     <img 
                       src={rev.img} 
                       alt={rev.name} 
-                      width="56"
-                      height="56"
                       loading="lazy"
+                      decoding="async"
                       className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30 shadow-lg shadow-blue-500/10" 
                     />
                     <div>
@@ -276,16 +266,17 @@ export default function Home({ theme }) {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 whileHover={{ y: -15, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 className="flex flex-col items-center text-center group cursor-default"
               >
                 <div className={`relative w-24 h-24 rounded-[2rem] flex items-center justify-center mb-4 transition-all duration-500
-                  ${isDark ? 'bg-white/5 border border-white/10' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50'}`}>
+                  ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10 shadow-none' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50'}`}>
+                  
+                  <div className="absolute inset-0 rounded-[2rem] blur-xl bg-blue-500/0 group-hover:bg-blue-500/20 transition-all duration-500" />
                   
                   <img 
                     src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
                     alt={tech.n}
-                    width="48"
-                    height="48"
                     loading="lazy"
                     decoding="async"
                     className="w-12 h-12 object-contain relative z-10" 
@@ -293,7 +284,7 @@ export default function Home({ theme }) {
                   />
                 </div>
                 <h5 className={`font-black text-[12px] mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{tech.n}</h5>
-                <p className={`text-[8px] font-bold uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all duration-300 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                <p className="text-[8px] font-bold text-slate-500 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all duration-300">
                   {tech.d}
                 </p>
               </motion.div>
@@ -319,20 +310,19 @@ export default function Home({ theme }) {
                   </div>
                   <div className="text-right">
                     <div className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>₹{plan.price}</div>
-                    <p className={`text-[10px] font-black uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Project</p>
+                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Project</p>
                   </div>
                 </div>
                 <h3 className={`text-2xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>{plan.title}</h3>
                 <ul className="space-y-4 mb-10">
                   {plan.feat.map((f, idx) => (
-                    <li key={idx} className={`flex items-center text-[11px] font-bold uppercase tracking-tighter ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                    <li key={idx} className="flex items-center text-[11px] font-bold text-slate-500 uppercase tracking-tighter">
                       <Check size={14} className="mr-3 text-blue-500" /> {f}
                     </li>
                   ))}
                 </ul>
                 <button 
                   onClick={scrollToContact}
-                  aria-label={`Select ${plan.title} Architecture`}
                   className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all
                   ${plan.highlight ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
                   Select Architecture
@@ -352,7 +342,7 @@ export default function Home({ theme }) {
                 <h2 className={`text-6xl font-black tracking-tighter mb-8 leading-[0.9] ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   INITIATE<br />TAKEOVER.
                 </h2>
-                <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   Engineering core available. Hostinger, Wix, and Shopify domains supported.
                 </p>
             </div>
