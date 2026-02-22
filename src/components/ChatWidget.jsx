@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-// Optimized Cloudinary link with auto-format, auto-quality, and specific width for performance
+// Optimized Cloudinary link
 const CLYRA_AVATAR_URL = "https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_120/v1771763391/imageclyra_v6truw.png";
 
 /* ────────────────────────────────────────────────────────────
@@ -162,7 +162,9 @@ export default function ChatWidget() {
           role="img"
           width="48" 
           height="48"
-          loading="lazy"
+          crossOrigin="anonymous" // Fixes Tracking Prevention log
+          fetchpriority="high"    // Fixes LCP/Intervention delay
+          decoding="async"
         />
 
         {/* ONLINE DOT */}
@@ -188,6 +190,8 @@ export default function ChatWidget() {
               alt="Clyra Mini Avatar" 
               width="32"
               height="32"
+              crossOrigin="anonymous"
+              decoding="async"
             />
             <div>
               <h3 className="font-semibold text-gray-900 text-sm">Clyra Support</h3>

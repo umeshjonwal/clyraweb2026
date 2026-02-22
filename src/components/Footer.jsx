@@ -15,10 +15,10 @@ export default function Footer({ theme }) {
   return (
     <footer className={`relative pt-40 pb-12 transition-colors duration-1000 ${isDark ? 'bg-[#020205]' : 'bg-slate-50'}`}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-20 mb-32">
-          
+
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-10">
               {/* SEO Fix: Changed label to differentiate from text links to the same domain */}
@@ -30,7 +30,7 @@ export default function Footer({ theme }) {
             <p className={`text-5xl md:text-7xl font-black mb-10 tracking-tight leading-[0.85] ${isDark ? 'text-white' : 'text-slate-900'}`}>
               Impact through <br /> <span className="text-blue-600">Experience.</span>
             </p>
-            
+
             <div className="flex gap-4">
               {[
                 { Icon: Linkedin, label: "LinkedIn", url: "https://linkedin.com/company/cylraweb" },
@@ -38,13 +38,13 @@ export default function Footer({ theme }) {
                 { Icon: Twitter, label: "Twitter", url: "https://twitter.com/cylraweb" },
                 { Icon: Github, label: "Github", url: "https://github.com/cylraweb" }
               ].map(({ Icon, label, url }) => (
-                <motion.a 
-                  key={label} 
+                <motion.a
+                  key={label}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Visit our ${label} page`} 
-                  whileHover={{ y: -5 }} 
+                  aria-label={`Visit our ${label} page`}
+                  whileHover={{ y: -5 }}
                   className={`p-4 rounded-2xl border transition-all ${
                     isDark ? 'bg-white/5 border-white/20 text-white hover:border-blue-500' : 'bg-white border-black/10 text-slate-600 hover:text-blue-600'
                   }`}
@@ -68,7 +68,6 @@ export default function Footer({ theme }) {
 
           <div>
             <p className={labelStyle}>Keep Pace</p>
-            {/* The SubscribeForm contrast fix should be handled within that component's input field */}
             <SubscribeForm theme={theme} idPrefix="footer" />
           </div>
         </div>
@@ -77,24 +76,27 @@ export default function Footer({ theme }) {
           isDark ? 'border-white/10 text-slate-300' : 'border-black/10 text-slate-600'
         }`}>
           <div className="space-y-4">
-             <div className="flex flex-col gap-1">
-                <p>© {new Date().getFullYear()} CYLRA CONSULTANCY SERVICES.</p>
-                {/* Accessibility Fix: Ensure text opacity is 100% for readability against dark backgrounds */}
-                <p className="opacity-100 font-bold">EST. 2024 — NEW DELHI, IN</p>
-             </div>
-             
-             <div className={`flex items-center space-x-2 py-2 px-4 rounded-full border w-fit ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/5'}`}>
-                <Code2 size={12} className="text-blue-600" />
-                <span>
-                  Engineered by{' '}
-                  <a 
-  href="https://www.linkedin.com/in/javawithumesh" 
-  className="text-white hover:text-blue-400 transition-colors border-b border-transparent hover:border-blue-400 pb-0.5"
->
-  UMESH JONWAL
-</a>
-                </span>
-             </div>
+            <div className="flex flex-col gap-1">
+              <p>© {new Date().getFullYear()} CYLRA CONSULTANCY SERVICES.</p>
+              <p className="opacity-100 font-bold">EST. 2024 — NEW DELHI, IN</p>
+            </div>
+
+            <div className={`flex items-center space-x-2 py-2 px-4 rounded-full border w-fit ${
+              isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/5'
+            }`}>
+              <Code2 size={12} className="text-blue-600" />
+              <span>
+                Engineered by{' '}
+                <a
+                  href="https://www.linkedin.com/in/javawithumesh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 decoration-blue-600/40 hover:text-blue-400 hover:decoration-blue-400 transition-all"
+                >
+                  UMESH JONWAL
+                </a>
+              </span>
+            </div>
           </div>
 
           <div className="flex gap-10 mt-8 md:mt-0">
