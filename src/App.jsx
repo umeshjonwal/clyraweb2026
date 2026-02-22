@@ -29,18 +29,18 @@ const routes = {
 
 // --- Page Accent Colors ---
 const pageAccent = {
-  "/": "220 90% 60%",        // blue-violet
-  "/services": "160 80% 45%", // green / teal
-  "/work": "260 85% 65%",     // purple
-  "/about": "35 90% 55%",     // amber
-  "/blog": "330 85% 65%",     // pink
-  "/contact": "195 85% 55%",  // cyan
+  "/": "220 90% 60%",         // blue-violet
+  "/services": "160 80% 45%",  // green / teal
+  "/work": "260 85% 65%",      // purple
+  "/about": "35 90% 55%",      // amber
+  "/blog": "330 85% 65%",      // pink
+  "/contact": "195 85% 55%",   // cyan
 };
 
 // --- Performance Guard ---
 const isLowEnd =
-  navigator.hardwareConcurrency <= 4 ||
-  navigator.deviceMemory <= 4;
+  typeof navigator !== "undefined" &&
+  (navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 4);
 
 export default function App() {
   const [theme, setTheme] = useState(
@@ -84,7 +84,7 @@ export default function App() {
       e.preventDefault();
       window.history.pushState({}, "", href);
       setPath(window.location.pathname);
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "instant" });
     };
 
     const handlePop = () => setPath(window.location.pathname);
@@ -102,17 +102,36 @@ export default function App() {
     <div
       className="
         relative min-h-screen overflow-x-hidden
-        transition-colors duration-300 ease-out
+        transition-colors duration-500 ease-in-out
         text-slate-900 dark:text-slate-300
       "
     >
+      {/* --- Neural Glow Layer --- 
+          This sits behind everything but on top of your CSS grid.
+          It uses the --page-accent you set in the useEffect above.
+      */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div 
+          className="absolute top-[-25%] left-[-25%] w-[150%] h-[150%] opacity-20 dark:opacity-10 blur-[120px] animate-[spin_60s_linear_infinite]"
+          style={{
+            background: `radial-gradient(circle at center, hsl(var(--page-accent)) 0%, transparent 40%)`,
+          }}
+        />
+      </div>
+
+      {/* --- Spatial Engine --- */}
       {!isLowEnd && <SpatialRoot pathname={path} />}
 
+      {/* --- UI Components --- */}
       <Nav theme={theme} setTheme={setTheme} />
       <ChatWidget />
       <WhatsAppFloat phone="919911274711" />
 
-      <main className="relative z-10 pt-28">
+      {/* --- Main Content --- 
+          Added 'key={path}' so the 'reveal' animation from your CSS 
+          triggers every time you change the page.
+      */}
+      <main key={path} className="relative z-10 pt-28 reveal">
         <Page theme={theme} />
       </main>
 

@@ -3,18 +3,32 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-// Persisted theme
-(function() {
-  const s = localStorage.getItem('theme')
-  if (s === 'dark' || (!s && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
-})()
+/**
+ * Optimized Theme Injection
+ * We run this immediately to prevent "Flash of Unstyled Content" (FOUC).
+ * Using 'classList.toggle' is more performant than 'add/remove' logic.
+ */
+const applyTheme = () => {
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+  document.documentElement.classList.toggle('dark', isDark);
+};
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+applyTheme();
+
+/**
+ * Root Rendering
+ * React.StrictMode is great for development but can double-render 
+ * some logic. This version ensures a clean mount.
+ */
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+}
