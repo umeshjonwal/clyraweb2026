@@ -1,15 +1,119 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Preconnects (Performance Boost) -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-7ZYTYHGX23"
+    ></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+
+      gtag("config", "G-7ZYTYHGX23");
+      gtag("config", "G-SYVGVW9HL5");
+    </script>
+
+    <!-- Basic Meta -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clyra — Next-Gen Digital Agency</title>
-    <meta name="description" content="Cylra is a next-gen digital agency crafting standout brands, blazing-fast websites, and ROI-first growth systems."/>
-    <link rel="icon" href="/assets/public_favicon-CSA_vyYC.svg" type="image/svg+xml"/>
-    <script type="module" crossorigin src="/assets/index-yBXNXFnj.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BEDKMJas.css">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+
+    <!-- Title -->
+    <title>Clyraweb — Custom AI & Web Development Agency</title>
+
+    <!-- SEO Description -->
+    <meta
+      name="description"
+      content="Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups."
+    />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://clyraweb.netlify.app/" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Google Site Verification -->
+    <meta
+      name="google-site-verification"
+      content="JKwC6RhXkiXwnkbKAZB2dS_t90qR5JvTLlWNrusFFH8"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Clyraweb — Custom AI & Web Development Agency"
+    />
+    <meta
+      property="og:description"
+      content="Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups."
+    />
+    <meta property="og:url" content="https://clyraweb.netlify.app/" />
+    <meta property="og:site_name" content="Clyraweb" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Clyraweb — Custom AI & Web Development Agency"
+    />
+    <meta
+      name="twitter:description"
+      content="Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups."
+    />
+
+    <!-- Structured Data: Digital Agency -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Clyraweb",
+      "url": "https://clyraweb.netlify.app/",
+      "logo": "https://clyraweb.netlify.app/public_favicon.svg",
+      "description": "Clyraweb is a custom digital agency building AI-powered websites, web apps, and software solutions for modern businesses and startups.",
+      "foundingDate": "2025",
+      "knowsAbout": [
+        "AI Development",
+        "Web Development",
+        "Custom Software",
+        "Full-Stack Applications",
+        "Digital Agency Services"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "category": "Digital Services",
+        "itemOffered": [
+          { "@type": "Service", "name": "AI-Powered Web Development" },
+          { "@type": "Service", "name": "Custom Web Applications" },
+          { "@type": "Service", "name": "Software Engineering" }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/cylraweb2026/assets/public_favicon-CSA_vyYC.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="/cylraweb2026/assets/index-ZvlbXloW.js"></script>
+    <link rel="stylesheet" crossorigin href="/cylraweb2026/assets/index-BLyAsIPy.css">
   </head>
+
   <body class="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <!-- FCP / No-JS fallback (helps Lighthouse) -->
+    <noscript>
+      <h1>Clyraweb — Custom AI & Web Development Agency</h1>
+    </noscript>
+
     <div id="root"></div>
+
+    <!-- React / Vite Entry -->
   </body>
 </html>

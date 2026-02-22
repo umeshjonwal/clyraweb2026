@@ -41,10 +41,10 @@ const SectionBadge = ({ children, theme }) => (
   <motion.div 
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
-    className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full border text-[11px] font-black tracking-[0.3em] uppercase mb-8 transition-colors
-      ${theme === 'dark' ? 'bg-blue-500/10 border-blue-500/30 text-blue-300' : 'bg-blue-50 border-blue-200 text-blue-700'}`}
+    className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full border text-[10px] font-black tracking-[0.3em] uppercase mb-8 transition-colors
+      ${theme === 'dark' ? 'bg-blue-500/5 border-blue-500/20 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}
   >
-    <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${theme === 'dark' ? 'bg-blue-400' : 'bg-blue-600'}`} />
+    <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${theme === 'dark' ? 'bg-blue-500' : 'bg-blue-600'}`} />
     <span>{children}</span>
   </motion.div>
 );
@@ -127,13 +127,13 @@ export default function Home({ theme }) {
               </span>
             </motion.h1>
             <p className={`text-xl max-w-xl mb-12 leading-relaxed font-medium 
-              ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+              ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
               Cylraweb integrates <strong>Spring Boot</strong> backends with <strong>React</strong> frontends. 
               We deploy AI-powered ecosystems using Gemini, Supabase, and Shopify.
             </p>
             <button 
               onClick={scrollToContact}
-              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 transition-all focus:ring-4 focus:ring-blue-400"
+              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 transition-all"
             >
               Initialize Project
             </button>
@@ -142,26 +142,27 @@ export default function Home({ theme }) {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline poster="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto,v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.jpg" className="w-full h-full object-cover opacity-60">
+                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
+                    {/* Performance: Added f_auto and vc_vp9 for max compression */}
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="relative z-20 h-full flex flex-col justify-end p-10">
                   <h2 className="text-4xl font-black text-white mb-2">Primary Core</h2>
-                  <p className="text-[11px] font-black uppercase tracking-[0.4em] text-blue-400">Neural Architecture</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Neural Architecture</p>
                 </div>
             </SpatialCard>
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline poster="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto,v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.jpg" className="w-full h-full object-cover opacity-60">
+                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="relative z-20 h-full flex flex-col justify-end p-10">
                   <h2 className="text-4xl font-black text-white mb-2">99.9%</h2>
-                  <p className="text-[11px] font-black uppercase tracking-[0.4em] text-blue-400">Uptime Intelligence</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Uptime Intelligence</p>
                 </div>
             </SpatialCard>
           </div>
@@ -177,7 +178,7 @@ export default function Home({ theme }) {
             <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group" aria-label={`View ${project.name} project live`}>
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
-                <div className="h-48 overflow-hidden bg-slate-800 relative">
+                <div className="h-48 overflow-hidden bg-slate-800">
                   <img 
                     src={project.img} 
                     alt={project.name} 
@@ -185,14 +186,13 @@ export default function Home({ theme }) {
                     decoding="async" 
                     width="800"
                     height="424"
-                    style={{ aspectRatio: '800/424' }}
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
                   />
                 </div>
                 <div className="p-8">
                   <Globe size={20} className="mb-4 text-blue-500" aria-hidden="true" />
                   <h3 className={`text-xl font-black mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.name}</h3>
-                  <p className={`text-[10px] font-bold uppercase tracking-widest ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>{project.tag}</p>
+                  <p className={`text-[9px] font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{project.tag}</p>
                 </div>
               </div>
             </a>
@@ -221,10 +221,10 @@ export default function Home({ theme }) {
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center space-x-4">
-                    <img src={rev.img} alt="" loading="lazy" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
+                    <img src={rev.img} alt="" loading="lazy" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
                     <div>
                       <h3 className="font-black text-base tracking-tight">{rev.name}</h3>
-                      <p className="text-[11px] text-blue-600 font-black uppercase tracking-widest">{rev.role}</p>
+                      <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{rev.role}</p>
                     </div>
                   </div>
                   <div className="flex space-x-0.5" aria-label="5 star rating">
@@ -233,7 +233,7 @@ export default function Home({ theme }) {
                     ))}
                   </div>
                 </div>
-                <p className={`text-[15px] leading-relaxed font-medium italic mb-2 whitespace-normal ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                <p className={`text-[15px] leading-relaxed font-medium italic mb-2 whitespace-normal ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                   "{rev.text}"
                 </p>
               </div>
@@ -282,18 +282,18 @@ export default function Home({ theme }) {
             <SpatialCard key={i} theme={theme} className={plan.highlight ? 'ring-2 ring-blue-500' : ''}>
               <div className="p-8">
                 <div className="flex justify-between items-start mb-10">
-                  <div className={`p-4 rounded-2xl ${isDark ? 'bg-white/10 text-blue-400' : 'bg-blue-50 text-blue-700'}`}>
+                  <div className={`p-4 rounded-2xl ${isDark ? 'bg-white/5 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
                     {React.cloneElement(plan.icon, { size: 24, "aria-hidden": "true" })}
                   </div>
                   <div className="text-right">
                     <div className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>₹{plan.price}</div>
-                    <p className={`text-[11px] font-black uppercase tracking-widest ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>Project</p>
+                    <p className={`text-[10px] font-black uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>Project</p>
                   </div>
                 </div>
                 <h3 className={`text-2xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>{plan.title}</h3>
                 <ul className="space-y-4 mb-10">
                   {plan.feat.map((f, idx) => (
-                    <li key={idx} className={`flex items-center text-[12px] font-bold uppercase tracking-tighter ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                    <li key={idx} className={`flex items-center text-[11px] font-bold uppercase tracking-tighter ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                       <Check size={14} className="mr-3 text-blue-500" aria-hidden="true" /> {f}
                     </li>
                   ))}
@@ -301,7 +301,7 @@ export default function Home({ theme }) {
                 <button 
                   onClick={scrollToContact}
                   className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all
-                  ${plan.highlight ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 border border-white/10 text-blue-600 hover:bg-blue-500/10'}`}>
+                  ${plan.highlight ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
                   Select Architecture
                 </button>
               </div>
@@ -319,7 +319,7 @@ export default function Home({ theme }) {
                 <h2 className={`text-6xl font-black tracking-tighter mb-8 leading-[0.9] ${isDark ? 'text-white' : 'text-slate-900'}`}>
                   INITIATE<br />TAKEOVER.
                 </h2>
-                <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
+                <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                   Engineering core available. Hostinger, Wix, and Shopify domains supported.
                 </p>
             </div>
