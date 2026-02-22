@@ -1,95 +1,66 @@
+import React from "react";
 import SubscribeForm from "./SubscribeForm";
+import { motion } from "framer-motion";
+import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
 
-export default function Footer() {
+export default function Footer({ theme }) {
+  const isDark = theme === 'dark';
+
   return (
-    <footer className="relative mt-24 border-t border-gray-200 dark:border-gray-800 overflow-hidden">
-      {/* ✨ Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900 opacity-50 pointer-events-none"></div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
-        {/* Brand */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-brand-600 to-accent-600 grid place-content-center text-white font-black shadow-lg shadow-accent-600/30">
-              C
+    <footer className={`relative pt-40 pb-12 transition-colors duration-1000 ${isDark ? 'bg-[#020205]' : 'bg-slate-50'}`}>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid md:grid-cols-4 gap-20 mb-32">
+          {/* Brand Info */}
+          <div className="md:col-span-2">
+            <div className="flex items-center space-x-3 mb-10">
+              <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl">C</div>
+              <span className={`text-3xl font-black uppercase tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>Cylraweb</span>
             </div>
-            <span className="text-xl font-extrabold">Clyra</span>
+            <p className={`text-5xl md:text-7xl font-black mb-10 tracking-tight leading-[0.85] ${isDark ? 'text-white' : 'text-slate-900'}`}>
+              Impact through <br /> <span className="text-blue-600">Experience.</span>
+            </p>
+            <div className="flex gap-4">
+              {[Linkedin, Instagram, Twitter, Github].map((Icon, i) => (
+                <motion.a key={i} whileHover={{ y: -5, color: '#2563eb' }} className={`p-4 rounded-2xl border transition-colors cursor-pointer ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white border-black/5 text-slate-500'}`}>
+                  <Icon size={20} />
+                </motion.a>
+              ))}
+            </div>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            A next-gen agency crafting brands, blazing-fast websites, and growth
-            systems that compound.
-          </p>
-        </div>
 
-        {/* Company */}
-        <div>
-          <h4 className="font-semibold mb-3">Company</h4>
-          <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-            {["About", "Case Studies", "Careers", "Blog"].map((item, i) => (
-              <li key={i}>
-                <a
-                  href={`/${item.toLowerCase().replace(" ", "")}`}
-                  className="relative transition-colors hover:text-accent-500
-                             before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-brand-500 before:to-accent-500 before:opacity-0 hover:before:opacity-20 before:transition"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+          {/* Sitemap */}
+          <div>
+            <p className="text-[10px] font-black uppercase text-slate-500 tracking-[0.4em] mb-10">Company</p>
+            <ul className={`space-y-4 text-sm font-bold ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              <li><a href="/work" className="hover:text-blue-600 transition-colors">Our Portfolio</a></li>
+              <li><a href="/services" className="hover:text-blue-600 transition-colors">Core Services</a></li>
+              <li><a href="/blog" className="hover:text-blue-600 transition-colors">Thinking</a></li>
+              <li><a href="/contact" className="hover:text-blue-600 transition-colors">Join Us</a></li>
+            </ul>
+          </div>
 
-        {/* Services */}
-        <div>
-          <h4 className="font-semibold mb-3">Services</h4>
-          <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-            {[
-              "Brand Identity",
-              "Web Design & Dev",
-              "Performance Marketing",
-              "AI Automation",
-            ].map((item, i) => (
-              <li key={i}>
-                <a
-                  href="/services"
-                  className="relative transition-colors hover:text-accent-500
-                             before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-brand-500 before:to-accent-500 before:opacity-0 hover:before:opacity-20 before:transition"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Newsletter */}
-        <div>
-          <h4 className="font-semibold mb-3">Newsletter</h4>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            Get monthly insights on design, growth, and AI.
-          </p>
-
-          {/* ✅ Subscribe form */}
-          <SubscribeForm />
-
-          <div className="flex gap-3 mt-4 text-sm text-gray-600 dark:text-gray-400">
-            {["LinkedIn", "Instagram", "Twitter"].map((item, i) => (
-              <a
-                key={i}
-                href="#"
-                className="hover:text-accent-500 transition-colors"
-                aria-label={item}
-              >
-                {item}
-              </a>
-            ))}
+          {/* Newsletter */}
+          <div>
+            <p className="text-[10px] font-black uppercase text-slate-500 tracking-[0.4em] mb-10">Keep Pace</p>
+            <SubscribeForm theme={theme} />
+            <p className="mt-6 text-[10px] text-slate-500 font-medium">Subscribe for high-fidelity updates only.</p>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="relative py-6 text-center text-sm text-gray-500 dark:text-gray-500 border-t border-gray-200 dark:border-gray-800">
-        © {new Date().getFullYear()} Cylra. All rights reserved by Umesh-Jonwal
+        {/* Legal */}
+        <div className={`pt-12 border-t flex flex-col md:flex-row justify-between text-[10px] font-black uppercase tracking-widest ${isDark ? 'border-white/5 text-slate-600' : 'border-black/5 text-slate-400'}`}>
+          <div className="flex flex-col gap-1">
+             <p>© {new Date().getFullYear()} CYLRA CONSULTANCY SERVICES.</p>
+             <p className="opacity-50">EST. 2024 — NEW DELHI, IN</p>
+          </div>
+          <div className="flex gap-10 mt-6 md:mt-0">
+            <a href="/privacy" className="hover:text-blue-600">Privacy</a>
+            <a href="/terms" className="hover:text-blue-600">Terms</a>
+            <a href="/cookies" className="hover:text-blue-600">Cookies</a>
+          </div>
+        </div>
       </div>
     </footer>
   );
