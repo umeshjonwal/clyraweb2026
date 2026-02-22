@@ -6,13 +6,6 @@
    1. FONT DEFINITION & IMMEDIATE USAGE
    Fixes: "Preload but not used" console warning
    ============================================================ */
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Black.woff2') format('woff2');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap; /* Fixes FCP/LCP delay by showing fallback text first */
-}
 
 @layer base {
   /* Applying font weight 900 triggers the browser to use the preloaded file */
