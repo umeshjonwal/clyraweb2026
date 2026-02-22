@@ -1,0 +1,15 @@
+# Ensure binary files are never modified by Git
+*.woff2 binary
+*.woff  binary
+*.ttf   binary
+*.otf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.svg   binary
+*.mp4   binary
+
+# Set default behavior to handle line endings for text files
+* text=auto
