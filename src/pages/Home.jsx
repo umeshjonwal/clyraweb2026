@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import Contact from "./Contact"; 
 
+// --- Sub-Component: Spatial Tilt Card ---
 const SpatialCard = ({ children, className = "", theme }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -37,10 +38,12 @@ const SpatialCard = ({ children, className = "", theme }) => {
   );
 };
 
+// --- Sub-Component: Section Badge ---
 const SectionBadge = ({ children, theme }) => (
   <motion.div 
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
     className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full border text-[10px] font-black tracking-[0.3em] uppercase mb-8 transition-colors
       ${theme === 'dark' ? 'bg-blue-500/5 border-blue-500/20 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}
   >
@@ -55,14 +58,10 @@ export default function Home({ theme }) {
   const reviews = [
     { name: "Alex Rivet", role: "CTO, Nexus", text: "The Spring Boot integration is flawless. Speed is unmatched across our entire stack.", img: "https://i.pravatar.cc/150?u=1" },
     { name: "Sarah Chen", role: "Founder, Bloom", text: "Cylraweb transformed our Shopify store into a high-tech ecosystem. Conversion is up 30%.", img: "https://i.pravatar.cc/150?u=2" },
-    { name: "Marcus Thorne", role: "Lead Dev, Arca", text: "The AI implementation using Gemini is actually intelligent, not just a script. Truly impressed.", img: "https://i.pravatar.cc/150?u=3" },
-    { name: "Elena Rossi", role: "Product Manager", text: "Beautifully designed UI with a backend that handles everything we throw at it. Rock solid.", img: "https://i.pravatar.cc/150?u=4" },
-    { name: "Julian Vane", role: "CEO, Vane Media", text: "Scalability was our priority, and they delivered a 99.9% uptime architecture without fail.", img: "https://i.pravatar.cc/150?u=5" },
-    { name: "Sofia Gupta", role: "Tech Lead", text: "The cleanest React code I've seen in years. Truly professional engineering and logic.", img: "https://i.pravatar.cc/150?u=6" },
-    { name: "David Stark", role: "Founder, IronWeb", text: "From briefing to deployment, the process was surgical and precise. No time was wasted.", img: "https://i.pravatar.cc/150?u=7" },
-    { name: "Leo Brooks", role: "Marketing Dir", text: "Our SEO scores skyrocketed after the migration to their custom node. Best investment yet.", img: "https://i.pravatar.cc/150?u=8" },
-    { name: "Maya K.", role: "Creative Director", text: "The animations are buttery smooth. User engagement is up 40% since the new launch.", img: "https://i.pravatar.cc/150?u=9" },
-    { name: "Victor Stone", role: "Operations Lead", text: "Supabase integration made our data management effortless. The dashboard is a lifesaver.", img: "https://i.pravatar.cc/150?u=10" },
+    { name: "Marcus Thorne", role: "Lead Dev, Arca", text: "The AI implementation using Gemini is actually intelligent, not just a script.", img: "https://i.pravatar.cc/150?u=3" },
+    { name: "Elena Rossi", role: "Product Manager", text: "Beautifully designed UI with a backend that handles everything we throw at it.", img: "https://i.pravatar.cc/150?u=4" },
+    { name: "Julian Vane", role: "CEO, Vane Media", text: "Scalability was our priority, and they delivered a 99.9% uptime architecture.", img: "https://i.pravatar.cc/150?u=5" },
+    { name: "Sofia Gupta", role: "Tech Lead", text: "The cleanest React code I've seen in years. Truly professional engineering.", img: "https://i.pravatar.cc/150?u=6" },
   ];
 
   const techStack = [
@@ -117,7 +116,7 @@ export default function Home({ theme }) {
             <motion.h1 
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className={`text-7xl md:text-[8.5rem] font-black leading-[0.8] tracking-tighter mb-10 
                 ${isDark ? 'text-white' : 'text-slate-900'}`}
             >
@@ -133,7 +132,7 @@ export default function Home({ theme }) {
             </p>
             <button 
               onClick={scrollToContact}
-              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 transition-all"
+              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 hover:-translate-y-1 active:translate-y-0 transition-all"
             >
               Initialize Project
             </button>
@@ -142,8 +141,7 @@ export default function Home({ theme }) {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
-                    {/* Performance: Added f_auto and vc_vp9 for max compression */}
+                  <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -155,7 +153,7 @@ export default function Home({ theme }) {
             </SpatialCard>
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
+                  <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -175,7 +173,7 @@ export default function Home({ theme }) {
         <h2 className={`text-6xl font-black tracking-tighter mb-20 ${isDark ? 'text-white' : 'text-slate-900'}`}>The Archives.</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {workHighlights.map((project, i) => (
-            <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group" aria-label={`View ${project.name} project live`}>
+            <a href={project.link} key={i} target="_blank" rel="noopener noreferrer" className="group" aria-label={`View ${project.name} project live`}>
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
@@ -183,10 +181,9 @@ export default function Home({ theme }) {
                     src={project.img} 
                     alt={project.name} 
                     loading="lazy" 
-                    decoding="async" 
                     width="800"
                     height="424"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   />
                 </div>
                 <div className="p-8">
@@ -200,7 +197,7 @@ export default function Home({ theme }) {
         </div>
       </section>
 
-      {/* REVIEWS SECTION */}
+      {/* REVIEWS SECTION - Infinite Marquee */}
       <section className="py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-6 mb-12">
           <SectionBadge theme={theme}>Transmission Feedback</SectionBadge>
@@ -211,7 +208,7 @@ export default function Home({ theme }) {
           <motion.div 
             className="flex whitespace-nowrap"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 35, repeat: Infinity }}
+            transition={{ ease: "linear", duration: 40, repeat: Infinity }}
           >
             {[...reviews, ...reviews].map((rev, i) => (
               <div 
@@ -227,9 +224,9 @@ export default function Home({ theme }) {
                       <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{rev.role}</p>
                     </div>
                   </div>
-                  <div className="flex space-x-0.5" aria-label="5 star rating">
+                  <div className="flex space-x-0.5">
                     {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} size={14} fill="#3b82f6" className="text-blue-500" aria-hidden="true" />
+                      <Star key={idx} size={14} fill="#3b82f6" className="text-blue-500" />
                     ))}
                   </div>
                 </div>
@@ -254,7 +251,7 @@ export default function Home({ theme }) {
             {techStack.map((tech, i) => (
               <div key={i} className="flex flex-col items-center text-center group cursor-default">
                 <div className={`relative w-24 h-24 rounded-[2rem] flex items-center justify-center mb-4 transition-all duration-500
-                  ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50'}`}>
+                  ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10 group-hover:scale-110' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50 group-hover:scale-110'}`}>
                   <img 
                     src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
                     alt={`${tech.n} logo`} 
@@ -294,14 +291,14 @@ export default function Home({ theme }) {
                 <ul className="space-y-4 mb-10">
                   {plan.feat.map((f, idx) => (
                     <li key={idx} className={`flex items-center text-[11px] font-bold uppercase tracking-tighter ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                      <Check size={14} className="mr-3 text-blue-500" aria-hidden="true" /> {f}
+                      <Check size={14} className="mr-3 text-blue-500" /> {f}
                     </li>
                   ))}
                 </ul>
                 <button 
                   onClick={scrollToContact}
                   className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all
-                  ${plan.highlight ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
+                  ${plan.highlight ? 'bg-blue-600 text-white shadow-lg hover:bg-blue-500' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
                   Select Architecture
                 </button>
               </div>

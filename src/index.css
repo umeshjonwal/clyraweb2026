@@ -7,7 +7,6 @@
 ================================ */
 :root {
   --radius: 1.25rem;
-
   /* Default page accent (Home) */
   --page-accent: 220 90% 60%;
 }
@@ -35,7 +34,8 @@
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    /* Accessibility: darkened muted-foreground for better contrast */
+    --muted-foreground: 0 0% 40%; 
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
@@ -43,7 +43,6 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
   }
 
   .dark {
@@ -58,7 +57,8 @@
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    /* Accessibility: lightened muted-foreground for better contrast in dark mode */
+    --muted-foreground: 0 0% 70%; 
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -71,92 +71,54 @@
 
 /* ================================
    🌌 GLOBAL BACKGROUND EFFECT
-   (SINGLE SOURCE OF TRUTH)
+   (OPTIMIZED FOR GPU PERFORMANCE)
 ================================ */
 @layer base {
   html {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    overflow-x: hidden;
   }
 
   html::before {
     content: "";
     position: fixed;
-    inset: 0;
+    /* Inset expanded to hide edges during transform animation */
+    inset: -100px;
     z-index: 0;
     pointer-events: none;
+    will-change: transform;
 
     /* Light mode grid + glow */
     background-image:
-      linear-gradient(
-        rgba(0, 0, 0, 0.05) 1px,
-        transparent 4px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.05) 1px,
-        transparent 5px
-      ),
-      radial-gradient(
-        circle at 30% 20%,
-        hsl(var(--page-accent) / 0.5),
-        transparent 80%
-      );
+      linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      radial-gradient(circle at 30% 20%, hsl(var(--page-accent) / 0.5), transparent 80%);
 
-    background-size:
-      40px 40px,
-      40px 40px,
-      100% 100%;
-
-    animation: gridMoveLight 30s linear infinite;
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+    /* performance: Use transform instead of background-position */
+    animation: gridMoveComposited 30s linear infinite;
     transition: background-image 0.6s ease;
   }
 
   .dark html::before {
     background-image:
-      linear-gradient(
-        rgba(120, 120, 255, 0.10) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(120, 120, 255, 0.10) 1px,
-        transparent 1px
-      ),
-      radial-gradient(
-        circle at 30% 20%,
-        hsl(var(--page-accent) / 0.45),
-        transparent 60%
-      );
+      linear-gradient(rgba(120, 120, 255, 0.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120, 120, 255, 0.10) 1px, transparent 1px),
+      radial-gradient(circle at 30% 20%, hsl(var(--page-accent) / 0.45), transparent 60%);
 
-    background-size:
-      48px 48px,
-      48px 48px,
-      100% 100%;
-
-    animation: gridMoveDark 24s linear infinite;
+    background-size: 48px 48px, 48px 48px, 100% 100%;
+    animation: gridMoveComposited 24s linear infinite reverse;
   }
 }
 
 /* ================================
-   BACKGROUND ANIMATIONS
+   PERFORMANCE-FIRST ANIMATIONS
+   (Uses GPU Compositing)
 ================================ */
-@keyframes gridMoveLight {
-  from {
-    background-position: 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: -320px -320px, -320px -320px, 0 0;
-  }
-}
-
-@keyframes gridMoveDark {
-  from {
-    background-position: 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: 420px 420px, 420px 420px, 0 0;
-  }
+@keyframes gridMoveComposited {
+  from { transform: translate(0, 0); }
+  to { transform: translate(48px, 48px); }
 }
 
 /* ================================
@@ -164,11 +126,11 @@
 ================================ */
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition shadow-sm hover:shadow;
+    @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold transition-all shadow-sm hover:shadow active:scale-95;
   }
 
   .btn-primary {
-    @apply bg-brand-600 text-white hover:bg-brand-700;
+    @apply bg-slate-900 text-white hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white;
   }
 
   .btn-ghost {
@@ -176,57 +138,32 @@
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800;
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 border border-transparent;
   }
 
   .card {
-    @apply rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/70 backdrop-blur p-6 shadow-sm;
+    @apply rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md p-6 shadow-sm;
   }
 }
 
 /* ================================
    RESPONSIVE TABLE HELPERS
 ================================ */
-.table-wrap {
-  @apply w-full;
-}
-
-.table {
-  @apply w-full text-left border-collapse hidden;
-}
-
-.table th,
-.table td {
-  @apply p-3 border-b border-gray-200 dark:border-gray-800 align-top;
-}
-
-.table-cards {
-  @apply grid gap-3;
-}
-
-.table-card {
-  @apply card;
-}
-
-.table-card dt {
-  @apply text-xs uppercase tracking-wide text-gray-500 mb-1;
-}
-
-.table-card dd {
-  @apply text-sm text-gray-800 dark:text-gray-200;
-}
+.table-wrap { @apply w-full overflow-x-auto; }
+.table { @apply w-full text-left border-collapse; }
+.table th, .table td { @apply p-4 border-b border-gray-200 dark:border-gray-800 align-middle; }
 
 /* ================================
    MOTION / INTERACTION
 ================================ */
 .reveal {
-  animation: rise 0.6s ease both;
+  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -235,6 +172,9 @@
 }
 
 .hover-3d {
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease-out;
   will-change: transform;
+}
+.hover-3d:hover {
+  transform: translateY(-4px) scale(1.02);
 }
