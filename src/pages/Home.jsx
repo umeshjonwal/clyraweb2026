@@ -132,7 +132,7 @@ export default function Home({ theme }) {
             </p>
             <button 
               onClick={scrollToContact}
-              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 hover:-translate-y-1 active:translate-y-0 transition-all"
+              className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 hover:-translate-y-1 active:translate-y-0 transition-all focus:ring-2 focus:ring-blue-400 focus:outline-none"
             >
               Initialize Project
             </button>
@@ -141,8 +141,7 @@ export default function Home({ theme }) {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  {/* Performance Fix: Using specific video codecs and auto-format for Cloudinary */}
-                  <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover opacity-60">
+                  <video autoPlay muted loop playsInline preload="metadata" crossOrigin="anonymous" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.jpg" type="video/mp4" />
                   </video>
                 </div>
@@ -154,7 +153,7 @@ export default function Home({ theme }) {
             </SpatialCard>
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover opacity-60">
+                  <video autoPlay muted loop playsInline preload="metadata" crossOrigin="anonymous" className="w-full h-full object-cover opacity-60">
                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.jpg" type="video/mp4" />
                   </video>
                 </div>
@@ -174,15 +173,15 @@ export default function Home({ theme }) {
         <h2 className={`text-6xl font-black tracking-tighter mb-20 ${isDark ? 'text-white' : 'text-slate-900'}`}>The Archives.</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {workHighlights.map((project, i) => (
-            <a href={project.link} key={i} target="_blank" rel="noopener noreferrer" className="group" aria-label={`View ${project.name} project live`}>
+            <a href={project.link} key={i} target="_blank" rel="noopener noreferrer" className="group block" aria-label={`View ${project.name} project live`}>
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
-                  {/* Performance Fix: Added dimensions to prevent CLS */}
                   <img 
                     src={project.img} 
                     alt={project.name} 
                     loading="lazy" 
+                    crossOrigin="anonymous"
                     width="800"
                     height="424"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
@@ -220,7 +219,7 @@ export default function Home({ theme }) {
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center space-x-4">
-                    <img src={rev.img} alt="" loading="lazy" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
+                    <img src={rev.img} alt="" loading="lazy" crossOrigin="anonymous" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
                     <div>
                       <h3 className="font-black text-base tracking-tight">{rev.name}</h3>
                       <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{rev.role}</p>
@@ -258,6 +257,7 @@ export default function Home({ theme }) {
                     src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
                     alt={`${tech.n} logo`} 
                     loading="lazy" 
+                    crossOrigin="anonymous"
                     width="48"
                     height="48"
                     className="w-12 h-12 object-contain relative z-10" 
@@ -299,7 +299,7 @@ export default function Home({ theme }) {
                 </ul>
                 <button 
                   onClick={scrollToContact}
-                  className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all
+                  className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
                   ${plan.highlight ? 'bg-blue-600 text-white shadow-lg hover:bg-blue-500' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
                   Select Architecture
                 </button>

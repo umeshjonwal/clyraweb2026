@@ -42,6 +42,9 @@ const ProjectCard = ({ name, desc, tech, link, img, theme }) => {
             alt={`${name} preview`}
             loading="lazy"
             decoding="async"
+            crossOrigin="anonymous"
+            width="800"
+            height="450"
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent opacity-80" />
@@ -51,7 +54,7 @@ const ProjectCard = ({ name, desc, tech, link, img, theme }) => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Visit ${name} live deployment`}
-            className="absolute top-6 right-6 p-3 bg-blue-600 text-white rounded-xl translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+            className="absolute top-6 right-6 p-3 bg-blue-600 text-white rounded-xl translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 focus:opacity-100 focus:translate-y-0"
           >
             <ExternalLink size={20} />
           </a>
@@ -240,7 +243,7 @@ export default function Work({ theme }) {
           </p>
           <a
             href="/contact"
-            className="inline-block px-12 py-6 bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/25"
+            className="inline-block px-12 py-6 bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/25 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           >
             Initialize Project
           </a>
