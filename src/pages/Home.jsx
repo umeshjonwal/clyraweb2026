@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 import Contact from "./Contact"; 
 
-// --- Spatial Component for 3D Interaction ---
 const SpatialCard = ({ children, className = "", theme }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -144,24 +143,24 @@ export default function Home({ theme }) {
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
                   <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
-                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,so_0/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                  <h3 className="text-4xl font-black text-white mb-2">Primary Core</h3>
+                  <h2 className="text-4xl font-black text-white mb-2">Primary Core</h2>
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500">Neural Architecture</p>
                 </div>
             </SpatialCard>
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
                   <video autoPlay muted loop playsInline preload="none" className="w-full h-full object-cover opacity-60">
-                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
+                     <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,so_0/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                  <h3 className="text-4xl font-black text-white mb-2">99.9%</h3>
+                  <h2 className="text-4xl font-black text-white mb-2">99.9%</h2>
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500">Uptime Intelligence</p>
                 </div>
             </SpatialCard>
@@ -175,13 +174,13 @@ export default function Home({ theme }) {
         <h2 className={`text-6xl font-black tracking-tighter mb-20 ${isDark ? 'text-white' : 'text-slate-900'}`}>The Archives.</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {workHighlights.map((project, i) => (
-            <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group" aria-label={`View ${project.name}`}>
+            <a href={project.link} key={i} target="_blank" rel="noreferrer" className="group" aria-label={`Open project: ${project.name}`}>
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
                   <img 
                     src={project.img} 
-                    alt={project.name} 
+                    alt="" 
                     loading="lazy" 
                     decoding="async" 
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
@@ -189,7 +188,7 @@ export default function Home({ theme }) {
                 </div>
                 <div className="p-8">
                   <Globe size={20} className="mb-4 text-blue-500" />
-                  <h4 className={`text-xl font-black mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.name}</h4>
+                  <h3 className={`text-xl font-black mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{project.name}</h3>
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{project.tag}</p>
                 </div>
               </div>
@@ -209,11 +208,7 @@ export default function Home({ theme }) {
           <motion.div 
             className="flex whitespace-nowrap"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ 
-              ease: "linear", 
-              duration: 35, 
-              repeat: Infinity 
-            }}
+            transition={{ ease: "linear", duration: 35, repeat: Infinity }}
           >
             {[...reviews, ...reviews].map((rev, i) => (
               <div 
@@ -223,15 +218,9 @@ export default function Home({ theme }) {
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center space-x-4">
-                    <img 
-                      src={rev.img} 
-                      alt={rev.name} 
-                      loading="lazy"
-                      decoding="async"
-                      className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30 shadow-lg shadow-blue-500/10" 
-                    />
+                    <img src={rev.img} alt={rev.name} loading="lazy" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
                     <div>
-                      <h4 className="font-black text-base tracking-tight">{rev.name}</h4>
+                      <h3 className="font-black text-base tracking-tight">{rev.name}</h3>
                       <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{rev.role}</p>
                     </div>
                   </div>
@@ -241,8 +230,7 @@ export default function Home({ theme }) {
                     ))}
                   </div>
                 </div>
-                <p className={`text-[15px] leading-relaxed font-medium italic mb-2 whitespace-normal
-                  ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                <p className={`text-[15px] leading-relaxed font-medium italic mb-2 whitespace-normal ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
                   "{rev.text}"
                 </p>
               </div>
@@ -261,33 +249,18 @@ export default function Home({ theme }) {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-10">
             {techStack.map((tech, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                whileHover={{ y: -15, scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="flex flex-col items-center text-center group cursor-default"
-              >
+              <div key={i} className="flex flex-col items-center text-center group cursor-default">
                 <div className={`relative w-24 h-24 rounded-[2rem] flex items-center justify-center mb-4 transition-all duration-500
-                  ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10 shadow-none' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50'}`}>
-                  
-                  <div className="absolute inset-0 rounded-[2rem] blur-xl bg-blue-500/0 group-hover:bg-blue-500/20 transition-all duration-500" />
-                  
+                  ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50'}`}>
                   <img 
-                    src={tech.custom || `https://cdn.simpleicons.org/${tech.l}?viewbox=auto`} 
-                    alt={tech.n}
-                    loading="lazy"
-                    decoding="async"
+                    src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
+                    alt={tech.n} 
+                    loading="lazy" 
                     className="w-12 h-12 object-contain relative z-10" 
-                    onError={(e) => { e.target.src = 'https://cdn.simpleicons.org/code-dot-org'; }}
                   />
                 </div>
-                <h5 className={`font-black text-[12px] mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{tech.n}</h5>
-                <p className="text-[8px] font-bold text-slate-500 uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  {tech.d}
-                </p>
-              </motion.div>
+                <h3 className={`font-black text-[12px] mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{tech.n}</h3>
+              </div>
             ))}
           </div>
         </div>
@@ -299,7 +272,6 @@ export default function Home({ theme }) {
           <SectionBadge theme={theme}>Investment Architecture</SectionBadge>
           <h2 className={`text-5xl md:text-8xl font-black tracking-tighter mb-8 ${isDark ? 'text-white' : 'text-slate-900'}`}>Pricing.</h2>
         </div>
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {pricingPlans.map((plan, i) => (
             <SpatialCard key={i} theme={theme} className={plan.highlight ? 'ring-2 ring-blue-500' : ''}>
@@ -310,14 +282,14 @@ export default function Home({ theme }) {
                   </div>
                   <div className="text-right">
                     <div className={`text-4xl font-black ${isDark ? 'text-white' : 'text-slate-900'}`}>₹{plan.price}</div>
-                    <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Project</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Project</p>
                   </div>
                 </div>
                 <h3 className={`text-2xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>{plan.title}</h3>
                 <ul className="space-y-4 mb-10">
                   {plan.feat.map((f, idx) => (
                     <li key={idx} className="flex items-center text-[11px] font-bold text-slate-400 uppercase tracking-tighter">
-                      <Check size={14} className="mr-3 text-blue-500" /> {f}
+                      <Check size={14} className="mr-3 text-blue-500" aria-hidden="true" /> {f}
                     </li>
                   ))}
                 </ul>
@@ -355,7 +327,6 @@ export default function Home({ theme }) {
     </div>
   );
 }
-
 // import React from 'react';
 // import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 // import { 
