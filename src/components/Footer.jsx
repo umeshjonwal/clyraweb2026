@@ -6,6 +6,11 @@ import { Instagram, Twitter, Linkedin, Github } from "lucide-react";
 export default function Footer({ theme }) {
   const isDark = theme === 'dark';
 
+  // Lighthouse Fix: Better contrast ratios for small uppercase text
+  const labelStyle = `text-[10px] font-black uppercase tracking-[0.4em] mb-10 ${
+    isDark ? 'text-slate-300' : 'text-slate-700'
+  }`;
+
   return (
     <footer className={`relative pt-40 pb-12 transition-colors duration-1000 ${isDark ? 'bg-[#020205]' : 'bg-slate-50'}`}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
@@ -22,8 +27,21 @@ export default function Footer({ theme }) {
               Impact through <br /> <span className="text-blue-600">Experience.</span>
             </p>
             <div className="flex gap-4">
-              {[Linkedin, Instagram, Twitter, Github].map((Icon, i) => (
-                <motion.a key={i} whileHover={{ y: -5, color: '#2563eb' }} className={`p-4 rounded-2xl border transition-colors cursor-pointer ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white border-black/5 text-slate-500'}`}>
+              {[
+                { Icon: Linkedin, label: "LinkedIn" },
+                { Icon: Instagram, label: "Instagram" },
+                { Icon: Twitter, label: "Twitter" },
+                { Icon: Github, label: "Github" }
+              ].map(({ Icon, label }, i) => (
+                <motion.a 
+                  key={i} 
+                  href="#"
+                  aria-label={`Visit our ${label} profile`}
+                  whileHover={{ y: -5, color: '#2563eb' }} 
+                  className={`p-4 rounded-2xl border transition-colors cursor-pointer ${
+                    isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white border-black/5 text-slate-500'
+                  }`}
+                >
                   <Icon size={20} />
                 </motion.a>
               ))}
@@ -32,7 +50,7 @@ export default function Footer({ theme }) {
 
           {/* Sitemap */}
           <div>
-            <p className="text-[10px] font-black uppercase text-slate-500 tracking-[0.4em] mb-10">Company</p>
+            <p className={labelStyle}>Company</p>
             <ul className={`space-y-4 text-sm font-bold ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               <li><a href="/work" className="hover:text-blue-600 transition-colors">Our Portfolio</a></li>
               <li><a href="/services" className="hover:text-blue-600 transition-colors">Core Services</a></li>
@@ -43,22 +61,29 @@ export default function Footer({ theme }) {
 
           {/* Newsletter */}
           <div>
-            <p className="text-[10px] font-black uppercase text-slate-500 tracking-[0.4em] mb-10">Keep Pace</p>
+            <p className={labelStyle}>Keep Pace</p>
+            {/* Ensure SubscribeForm.jsx uses an id other than "email" 
+                (e.g., id="footer-newsletter-email") to avoid duplicate ID errors.
+            */}
             <SubscribeForm theme={theme} />
-            <p className="mt-6 text-[10px] text-slate-500 font-medium">Subscribe for high-fidelity updates only.</p>
+            <p className={`mt-6 text-[10px] font-medium ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+              Subscribe for high-fidelity updates only.
+            </p>
           </div>
         </div>
 
         {/* Legal */}
-        <div className={`pt-12 border-t flex flex-col md:flex-row justify-between text-[10px] font-black uppercase tracking-widest ${isDark ? 'border-white/5 text-slate-600' : 'border-black/5 text-slate-400'}`}>
+        <div className={`pt-12 border-t flex flex-col md:flex-row justify-between text-[10px] font-black uppercase tracking-widest ${
+          isDark ? 'border-white/5 text-slate-400' : 'border-black/5 text-slate-500'
+        }`}>
           <div className="flex flex-col gap-1">
              <p>© {new Date().getFullYear()} CYLRA CONSULTANCY SERVICES.</p>
-             <p className="opacity-50">EST. 2024 — NEW DELHI, IN</p>
+             <p className="opacity-70">EST. 2024 — NEW DELHI, IN</p>
           </div>
           <div className="flex gap-10 mt-6 md:mt-0">
-            <a href="/privacy" className="hover:text-blue-600">Privacy</a>
-            <a href="/terms" className="hover:text-blue-600">Terms</a>
-            <a href="/cookies" className="hover:text-blue-600">Cookies</a>
+            <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-blue-600 transition-colors">Terms</a>
+            <a href="/cookies" className="hover:text-blue-600 transition-colors">Cookies</a>
           </div>
         </div>
       </div>
