@@ -27,28 +27,55 @@ const routes = {
   "/blog": Blog,
 };
 
-// --- Page Accent Colors ---
 const pageAccent = {
-  "/": "220 90% 60%",         // blue-violet
-  "/services": "160 80% 45%",  // green / teal
-  "/work": "260 85% 65%",      // purple
-  "/about": "35 90% 55%",      // amber
-  "/blog": "330 85% 65%",      // pink
-  "/contact": "195 85% 55%",   // cyan
+  "/": "220 90% 60%",
+  "/services": "160 80% 45%",
+  "/work": "260 85% 65%",
+  "/about": "35 90% 55%",
+  "/blog": "330 85% 65%",
+  "/contact": "195 85% 55%",
 };
 
-// --- Performance Guard ---
 const isLowEnd =
   typeof navigator !== "undefined" &&
   (navigator.hardwareConcurrency <= 4 || navigator.deviceMemory <= 4);
 
 export default function App() {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const [path, setPath] = useState(window.location.pathname);
 
   const Page = useMemo(() => routes[path] || Home, [path]);
+
+  // --- 1. Global Variable Font Injection ---
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @font-face {
+        font-family: 'Inter';
+        src: url('/Inter-Variable.woff2') format('woff2');
+        font-weight: 100 900;
+        font-display: swap;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        src: url('/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+        font-weight: 100 900;
+        font-display: swap;
+        font-style: italic;
+      }
+
+      :root {
+        font-family: 'Inter', system-ui, sans-serif;
+        /* Enable high-end typography features */
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        font-variation-settings: 'opsz' 32;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
 
   // --- Theme Sync ---
   useEffect(() => {
@@ -60,10 +87,7 @@ export default function App() {
   // --- Page Accent Sync ---
   useEffect(() => {
     const accent = pageAccent[path] || pageAccent["/"];
-    document.documentElement.style.setProperty(
-      "--page-accent",
-      accent
-    );
+    document.documentElement.style.setProperty("--page-accent", accent);
   }, [path]);
 
   // --- Lightweight Router ---
@@ -71,15 +95,8 @@ export default function App() {
     const handleNav = (e) => {
       const link = e.target.closest("a[href]");
       if (!link) return;
-
       const href = link.getAttribute("href");
-      if (
-        !href ||
-        href.startsWith("http") ||
-        href.startsWith("#") ||
-        href.includes(":")
-      )
-        return;
+      if (!href || href.startsWith("http") || href.startsWith("#") || href.includes(":")) return;
 
       e.preventDefault();
       window.history.pushState({}, "", href);
@@ -88,7 +105,6 @@ export default function App() {
     };
 
     const handlePop = () => setPath(window.location.pathname);
-
     document.addEventListener("click", handleNav);
     window.addEventListener("popstate", handlePop);
 
@@ -104,12 +120,9 @@ export default function App() {
         relative min-h-screen overflow-x-hidden
         transition-colors duration-500 ease-in-out
         text-slate-900 dark:text-slate-300
+        antialiased
       "
     >
-      {/* --- Neural Glow Layer --- 
-          This sits behind everything but on top of your CSS grid.
-          It uses the --page-accent you set in the useEffect above.
-      */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div 
           className="absolute top-[-25%] left-[-25%] w-[150%] h-[150%] opacity-20 dark:opacity-10 blur-[120px] animate-[spin_60s_linear_infinite]"
@@ -119,18 +132,12 @@ export default function App() {
         />
       </div>
 
-      {/* --- Spatial Engine --- */}
       {!isLowEnd && <SpatialRoot pathname={path} />}
 
-      {/* --- UI Components --- */}
       <Nav theme={theme} setTheme={setTheme} />
       <ChatWidget />
       <WhatsAppFloat phone="919911274711" />
 
-      {/* --- Main Content --- 
-          Added 'key={path}' so the 'reveal' animation from your CSS 
-          triggers every time you change the page.
-      */}
       <main key={path} className="relative z-10 pt-28 reveal">
         <Page theme={theme} />
       </main>
