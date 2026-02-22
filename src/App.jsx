@@ -46,35 +46,26 @@ export default function App() {
 
   const Page = useMemo(() => routes[path] || Home, [path]);
 
-  // --- 1. Global Variable Font Injection ---
+  // --- 1. Corrected Font Injection ---
+  // Ensuring the path is absolute and points to the fonts subdirectory
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
       @font-face {
         font-family: 'Inter';
-        src: url('/Inter-Variable.woff2') format('woff2');
+        /* The path must include /fonts/ to match your structure */
+        src: url('/fonts/Inter-Variable.woff2') format('woff2');
         font-weight: 100 900;
         font-display: swap;
         font-style: normal;
       }
 
-      @font-face {
-        font-family: 'Inter';
-        src: url('/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
-        font-weight: 100 900;
-        font-display: swap;
-        font-style: italic;
-      }
-
       :root {
         font-family: 'Inter', system-ui, sans-serif;
-        /* Enable high-end typography features */
-        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-        font-variation-settings: 'opsz' 32;
       }
     `;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => { if (document.head.contains(style)) document.head.removeChild(style); };
   }, []);
 
   // --- Theme Sync ---
@@ -96,6 +87,8 @@ export default function App() {
       const link = e.target.closest("a[href]");
       if (!link) return;
       const href = link.getAttribute("href");
+      
+      // Filter out external links and anchors
       if (!href || href.startsWith("http") || href.startsWith("#") || href.includes(":")) return;
 
       e.preventDefault();
@@ -123,6 +116,7 @@ export default function App() {
         antialiased
       "
     >
+      {/* Neural Glow Layer - Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div 
           className="absolute top-[-25%] left-[-25%] w-[150%] h-[150%] opacity-20 dark:opacity-10 blur-[120px] animate-[spin_60s_linear_infinite]"
@@ -132,10 +126,13 @@ export default function App() {
         />
       </div>
 
+      {/* Spatial/3D Engine (Disabled on low-end devices for speed) */}
       {!isLowEnd && <SpatialRoot pathname={path} />}
 
       <Nav theme={theme} setTheme={setTheme} />
+      
       <ChatWidget />
+      
       <WhatsAppFloat phone="919911274711" />
 
       <main key={path} className="relative z-10 pt-28 reveal">

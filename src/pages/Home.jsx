@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { 
+import {
   Check, Globe, Layout, Zap, Boxes, Star, Sparkles, ShoppingCart, Building2
 } from 'lucide-react';
-import Contact from "./Contact"; 
+import Contact from "./Contact";
 
 // --- Sub-Component: Spatial Tilt Card ---
 const SpatialCard = ({ children, className = "", theme }) => {
@@ -40,7 +40,7 @@ const SpatialCard = ({ children, className = "", theme }) => {
 
 // --- Sub-Component: Section Badge ---
 const SectionBadge = ({ children, theme }) => (
-  <div 
+  <div
     className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full border text-[10px] font-black tracking-[0.3em] uppercase mb-8 transition-colors
       ${theme === 'dark' ? 'bg-blue-500/5 border-blue-500/20 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}
   >
@@ -88,12 +88,12 @@ export default function Home({ theme }) {
   ];
 
   const workHighlights = [
-    { name: 'Doppelganger Finder', tag: 'Supabase • Cloud API', link: 'https://doppelganger.world/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled1_egi96v.png' },
-    { name: 'AI Email Gen', tag: 'Spring Boot • Gemini', link: 'https://coruscating-beijinho-edb225.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled2_malquj.png' },
-    { name: 'Spotify UI', tag: 'CSS Grid • Logic', link: 'https://umeshjonwal.github.io/spotify-clone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled3_bhqxx8.png' },
-    { name: 'Miranda Clone', tag: 'Motion Design', link: 'https://umeshjonwal.github.io/mirandaclone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled4_f7khzo.png' },
-    { name: 'Narmata Project', tag: 'Semantic UI', link: 'https://umeshjonwal.github.io/narmataproject/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256804/Untitled5_kycoja.png' },
-    { name: 'Clyra World', tag: 'React • Netlify', link: 'https://clyraworld.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled6_hj7ico.png' }
+    { name: 'Doppelganger Finder', tag: 'Supabase • Cloud API', link: 'https://doppelganger.world/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled1_egi96v.jpg' },
+    { name: 'AI Email Gen', tag: 'Spring Boot • Gemini', link: 'https://coruscating-beijinho-edb225.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled2_malquj.jpg' },
+    { name: 'Spotify UI', tag: 'CSS Grid • Logic', link: 'https://umeshjonwal.github.io/spotify-clone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled3_bhqxx8.jpg' },
+    { name: 'Miranda Clone', tag: 'Motion Design', link: 'https://umeshjonwal.github.io/mirandaclone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled4_f7khzo.jpg' },
+    { name: 'Narmata Project', tag: 'Semantic UI', link: 'https://umeshjonwal.github.io/narmataproject/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256804/Untitled5_kycoja.jpg' },
+    { name: 'Clyra World', tag: 'React • Netlify', link: 'https://clyraworld.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled6_hj7ico.jpg' }
   ];
 
   const pricingPlans = [
@@ -111,13 +111,13 @@ export default function Home({ theme }) {
 
   return (
     <div className="space-y-40 pb-32 overflow-hidden">
-      
+
       {/* 1. HERO SECTION */}
       <section className="max-w-7xl mx-auto px-6 pt-16">
         <div className="grid lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-7 lg:sticky lg:top-32">
             <SectionBadge theme={theme}>Full-Stack AI Engineering</SectionBadge>
-            
+
             <h1 className={`text-7xl md:text-[8.5rem] font-black leading-[0.8] tracking-tighter mb-10 
                 ${isDark ? 'text-white' : 'text-slate-900'}`}>
               WEAVE<br />
@@ -128,10 +128,10 @@ export default function Home({ theme }) {
 
             <p className={`text-xl max-w-xl mb-12 leading-relaxed font-medium 
               ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-              Cylraweb integrates <strong>Spring Boot</strong> backends with <strong>React</strong> frontends. 
+              Cylraweb integrates <strong>Spring Boot</strong> backends with <strong>React</strong> frontends.
               We deploy AI-powered ecosystems using Gemini, Supabase, and Shopify.
             </p>
-            <button 
+            <button
               onClick={scrollToContact}
               className="px-10 py-5 bg-blue-600 text-white font-black uppercase tracking-[0.2em] text-xs rounded-2xl shadow-xl hover:bg-blue-500 hover:-translate-y-1 active:translate-y-0 transition-all focus:ring-2 focus:ring-blue-400 focus:outline-none"
             >
@@ -141,30 +141,65 @@ export default function Home({ theme }) {
 
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
-                <div className="absolute inset-0 z-0 bg-slate-900">
-                  {/* Fixed Video Source & Error Prevention */}
-                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover opacity-60">
-                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/q_auto,vc_h264/v1740256770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                  <h2 className="text-4xl font-black text-white mb-2">Primary Core</h2>
-                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Neural Architecture</p>
-                </div>
+              <div className="absolute inset-0 z-0 bg-slate-900">
+                {/* Fixed Video Source & Error Prevention */}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full object-cover opacity-60"
+                >
+                  {/* f_auto: Cloudinary will pick the best format (WebM/AV1/MP4) for the browser */}
+                  {/* q_auto: Cloudinary will compress the video to the lowest size without losing quality */}
+                  <source
+                    src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto/v1740256770/abrhr9zpfjt1ymmnfcf9_iqrtgi"
+                    type="video/webm"
+                  />
+
+                  {/* Fallback for older browsers */}
+                  <source
+                    src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto/v1740256770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
+              <div className="relative z-20 h-full flex flex-col justify-end p-10">
+                <h2 className="text-4xl font-black text-white mb-2">Primary Core</h2>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Neural Architecture</p>
+              </div>
             </SpatialCard>
 
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
-                <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover opacity-60">
-                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/q_auto,vc_h264/v1740256764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="relative z-20 h-full flex flex-col justify-end p-10">
-                  <h2 className="text-4xl font-black text-white mb-2">99.9%</h2>
-                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Uptime Intelligence</p>
-                </div>
+              <div className="absolute inset-0 z-0 bg-slate-900">
+               <video 
+  autoPlay 
+  muted 
+  loop 
+  playsInline 
+  preload="auto" 
+  className="w-full h-full object-cover opacity-60"
+>
+  {/* The 'f_auto' parameter is the secret to speed—it serves the smallest file type possible */}
+  <source 
+    src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto/v1740256764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj" 
+    type="video/webm" 
+  />
+  
+  {/* Standard fallback for maximum compatibility */}
+  <source 
+    src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto,q_auto/v1740256764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" 
+    type="video/mp4" 
+  />
+</video>
+              </div>
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
+              <div className="relative z-20 h-full flex flex-col justify-end p-10">
+                <h2 className="text-4xl font-black text-white mb-2">99.9%</h2>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Uptime Intelligence</p>
+              </div>
             </SpatialCard>
           </div>
         </div>
@@ -180,13 +215,13 @@ export default function Home({ theme }) {
               <div className={`rounded-[2.5rem] border overflow-hidden transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
-                  <img 
-                    src={optimizeCloudinary(project.img, 600)} 
-                    alt={project.name} 
-                    loading="lazy" 
+                  <img
+                    src={optimizeCloudinary(project.img, 600)}
+                    alt={project.name}
+                    loading="lazy"
                     width="600"
                     height="318"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     onError={(e) => { e.target.src = "https://placehold.co/600x400?text=Project+Coming+Soon"; }}
                   />
                 </div>
@@ -207,16 +242,16 @@ export default function Home({ theme }) {
           <SectionBadge theme={theme}>Transmission Feedback</SectionBadge>
           <h2 className={`text-5xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>Operator Intel.</h2>
         </div>
-        
+
         <div className="relative flex overflow-x-hidden group">
-          <motion.div 
+          <motion.div
             className="flex whitespace-nowrap"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ ease: "linear", duration: 40, repeat: Infinity }}
           >
             {[...reviews, ...reviews].map((rev, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className={`flex-shrink-0 w-[450px] mx-4 p-10 rounded-[2.5rem] border backdrop-blur-sm transition-all duration-500
                 ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-white border-black/5 shadow-xl text-slate-900'}`}
               >
@@ -256,13 +291,13 @@ export default function Home({ theme }) {
               <div key={i} className="flex flex-col items-center text-center group cursor-default">
                 <div className={`relative w-24 h-24 rounded-[2rem] flex items-center justify-center mb-4 transition-all duration-500
                   ${isDark ? 'bg-white/5 border border-white/10 group-hover:bg-blue-500/10 group-hover:scale-110' : 'bg-white border border-black/5 shadow-lg group-hover:bg-blue-50 group-hover:scale-110'}`}>
-                  <img 
-                    src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
-                    alt={`${tech.n} logo`} 
-                    loading="lazy" 
+                  <img
+                    src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`}
+                    alt={`${tech.n} logo`}
+                    loading="lazy"
                     width="48"
                     height="48"
-                    className="w-12 h-12 object-contain relative z-10" 
+                    className="w-12 h-12 object-contain relative z-10"
                   />
                 </div>
                 <h3 className={`font-black text-[12px] mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>{tech.n}</h3>
@@ -299,7 +334,7 @@ export default function Home({ theme }) {
                     </li>
                   ))}
                 </ul>
-                <button 
+                <button
                   onClick={scrollToContact}
                   className={`w-full py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
                   ${plan.highlight ? 'bg-blue-600 text-white shadow-lg hover:bg-blue-500' : 'bg-white/5 border border-white/10 text-blue-500 hover:bg-blue-500/10'}`}>
@@ -317,12 +352,12 @@ export default function Home({ theme }) {
           ${isDark ? 'bg-[#0a0a0f] border-white/5' : 'bg-white border-black/5 shadow-2xl shadow-blue-500/5'}`}>
           <div className="grid lg:grid-cols-2">
             <div className="p-16 relative overflow-hidden bg-gradient-to-br from-blue-600/10 to-transparent flex flex-col justify-center">
-                <h2 className={`text-6xl font-black tracking-tighter mb-8 leading-[0.9] ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  INITIATE<br />TAKEOVER.
-                </h2>
-                <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                  Engineering core available. Hostinger, Wix, and Shopify domains supported.
-                </p>
+              <h2 className={`text-6xl font-black tracking-tighter mb-8 leading-[0.9] ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                INITIATE<br />TAKEOVER.
+              </h2>
+              <p className={`text-lg mb-12 max-w-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
+                Engineering core available. Hostinger, Wix, and Shopify domains supported.
+              </p>
             </div>
             <div className={`p-16 border-l transition-colors ${isDark ? 'bg-black/40 border-white/5' : 'bg-slate-50 border-black/5'}`}>
               <Contact theme={theme} />
