@@ -5,9 +5,10 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   base: '/',
-  // REMOVED assetsInclude for woff2 - no longer needed with system fonts
+  
+  // 🛠️ Ensure Vite handles the font format correctly during build
+  assetsInclude: ['**/*.woff2'], 
 
-  // 🛠️ Development Server Stability
   server: {
     port: 5173,
     strictPort: true, 
@@ -19,7 +20,6 @@ export default defineConfig({
 
   plugins: [
     react(),
-    // Performance: Dual compression for modern hosting (like Cloudflare/Netlify)
     compression({ algorithm: 'gzip', ext: '.gz' }),
     compression({ algorithm: 'brotliCompress', ext: '.br' }), 
     visualizer({
@@ -41,7 +41,6 @@ export default defineConfig({
     
     rollupOptions: {
       output: {
-        // 📦 Smart Chunking: Keeps your main entry file tiny for fast LCP
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('framer-motion')) return 'vendor-motion';
@@ -50,21 +49,20 @@ export default defineConfig({
             return 'vendor-libs'; 
           }
         },
-        // Clean asset structure
+        // Using specific folders keeps your root clean
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        // This ensures your images/fonts stay in their expected extensions
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
       },
     },
 
-    // ⚡ Performance: Forces files to be separate for better caching & parallel loading
     assetsInlineLimit: 0, 
     chunkSizeWarningLimit: 1000, 
     sourcemap: false,
   },
 
   optimizeDeps: {
-    // Pre-bundles these to prevent dev-server "re-loading" jitters
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react']
   }
 })
