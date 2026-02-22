@@ -17,3 +17,4 @@ npm run preview
 "# clyra" 
 "# clyraweb" 
 "# clyraweb" 
+"# clyraweb2026" 
