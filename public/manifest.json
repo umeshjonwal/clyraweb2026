@@ -1,0 +1,16 @@
+{
+  "short_name": "Clyraweb",
+  "name": "Clyraweb — Custom AI & Web Agency",
+  "icons": [
+    {
+      "src": "/public_favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#020205",
+  "display": "standalone",
+  "theme_color": "#020205",
+  "description": "Premier digital consultancy building high-performance AI-powered solutions."
+}
