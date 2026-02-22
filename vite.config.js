@@ -5,37 +5,50 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   base: '/',
-  
-  // FIX: Explicitly treat woff2 as assets to prevent "Failed to decode" corruption
   assetsInclude: ['**/*.woff2'],
+
+  // FIX: Stability for Development Server
+  server: {
+    port: 5173,
+    strictPort: true, // Prevents port jumping
+    host: true,       // Exposes the project on your local network
+    hmr: {
+      overlay: true,  // Shows errors in browser to prevent silent crashes
+    },
+  },
 
   plugins: [
     react(),
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024,
-      deleteOriginFile: false
-    }),
+    // Keep Brotli and Gzip for maximum performance
+    compression({ algorithm: 'gzip', ext: '.gz' }),
+    compression({ algorithm: 'brotliCompress', ext: '.br' }), 
     visualizer({
       filename: 'bundle-stats.html',
-      open: false, 
       gzipSize: true,
       template: 'treemap' 
     })
   ],
 
   build: {
-    target: 'esnext',
-    minify: 'esbuild', 
+    // Changing from 'esnext' to 'es2020' improves stability across environments
+    target: 'es2020', 
+    minify: 'terser', // Terser is slightly slower but produces smaller, more optimized code than esbuild
+    terserOptions: {
+      compress: {
+        drop_console: true, // Cleans up logs for production
+        drop_debugger: true
+      }
+    },
     
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            // Grouping by functionality helps with browser caching
             if (id.includes('framer-motion')) return 'vendor-motion';
             if (id.includes('lucide-react')) return 'vendor-icons';
-            return 'vendor-core'; 
+            if (id.includes('react') || id.includes('scheduler')) return 'vendor-react';
+            return 'vendor-libs'; 
           }
         },
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -44,13 +57,13 @@ export default defineConfig({
       },
     },
 
-    // Performance: No inlining to ensure CDN/Cloudflare caching works 100%
     assetsInlineLimit: 0, 
-    chunkSizeWarningLimit: 800,
+    chunkSizeWarningLimit: 1000, // Raised slightly for vendor chunks
     sourcemap: false,
   },
 
   optimizeDeps: {
+    // Ensure stable dependency pre-bundling
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react']
   }
 })
