@@ -25,11 +25,15 @@ export default function WhatsAppFloat({ phone }) {
           shadow-[0_16px_40px_rgba(37,211,102,0.35)]
         "
       >
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-          alt="WhatsApp"
-          className="w-7 h-7 select-none pointer-events-none"
-        />
+       <img
+  src="/WhatsApp.svg" // Use the SVG version for better performance/quality
+  alt="Contact us on WhatsApp"
+  width="28" // Explicit dimensions prevent layout shifts
+  height="28"
+  className="w-7 h-7 select-none pointer-events-none"
+  loading="lazy" // This is fine since this icon is likely in the footer/contact area
+  decoding="async"
+/>
       </motion.a>
     </div>
   );

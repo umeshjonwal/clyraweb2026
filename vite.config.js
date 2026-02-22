@@ -5,21 +5,21 @@ import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   base: '/',
-  assetsInclude: ['**/*.woff2'],
+  // REMOVED assetsInclude for woff2 - no longer needed with system fonts
 
-  // FIX: Stability for Development Server
+  // 🛠️ Development Server Stability
   server: {
     port: 5173,
-    strictPort: true, // Prevents port jumping
-    host: true,       // Exposes the project on your local network
+    strictPort: true, 
+    host: true,       
     hmr: {
-      overlay: true,  // Shows errors in browser to prevent silent crashes
+      overlay: true,  
     },
   },
 
   plugins: [
     react(),
-    // Keep Brotli and Gzip for maximum performance
+    // Performance: Dual compression for modern hosting (like Cloudflare/Netlify)
     compression({ algorithm: 'gzip', ext: '.gz' }),
     compression({ algorithm: 'brotliCompress', ext: '.br' }), 
     visualizer({
@@ -30,40 +30,41 @@ export default defineConfig({
   ],
 
   build: {
-    // Changing from 'esnext' to 'es2020' improves stability across environments
     target: 'es2020', 
-    minify: 'terser', // Terser is slightly slower but produces smaller, more optimized code than esbuild
+    minify: 'terser', 
     terserOptions: {
       compress: {
-        drop_console: true, // Cleans up logs for production
+        drop_console: true, 
         drop_debugger: true
       }
     },
     
     rollupOptions: {
       output: {
+        // 📦 Smart Chunking: Keeps your main entry file tiny for fast LCP
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Grouping by functionality helps with browser caching
             if (id.includes('framer-motion')) return 'vendor-motion';
             if (id.includes('lucide-react')) return 'vendor-icons';
             if (id.includes('react') || id.includes('scheduler')) return 'vendor-react';
             return 'vendor-libs'; 
           }
         },
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
+        // Clean asset structure
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]'
       },
     },
 
+    // ⚡ Performance: Forces files to be separate for better caching & parallel loading
     assetsInlineLimit: 0, 
-    chunkSizeWarningLimit: 1000, // Raised slightly for vendor chunks
+    chunkSizeWarningLimit: 1000, 
     sourcemap: false,
   },
 
   optimizeDeps: {
-    // Ensure stable dependency pre-bundling
+    // Pre-bundles these to prevent dev-server "re-loading" jitters
     include: ['react', 'react-dom', 'framer-motion', 'lucide-react']
   }
 })

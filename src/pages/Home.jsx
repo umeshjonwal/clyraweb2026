@@ -40,28 +40,32 @@ const SpatialCard = ({ children, className = "", theme }) => {
 
 // --- Sub-Component: Section Badge ---
 const SectionBadge = ({ children, theme }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+  <div 
     className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full border text-[10px] font-black tracking-[0.3em] uppercase mb-8 transition-colors
       ${theme === 'dark' ? 'bg-blue-500/5 border-blue-500/20 text-blue-400' : 'bg-blue-50 border-blue-200 text-blue-600'}`}
   >
     <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${theme === 'dark' ? 'bg-blue-500' : 'bg-blue-600'}`} />
     <span>{children}</span>
-  </motion.div>
+  </div>
 );
 
 export default function Home({ theme }) {
   const isDark = theme === 'dark';
 
+  // --- Optimization: Dynamic Cloudinary URL Generator & Error Handling ---
+  const optimizeCloudinary = (url, width = 800) => {
+    if (!url || !url.includes('cloudinary.com')) return url;
+    return url.replace('/upload/', `/upload/f_auto,q_auto,w_${width}/`);
+  };
+
+  // Fix: Pravatar often fails with CORS. Switched to UI-Avatars or placehold.it fallbacks
   const reviews = [
-    { name: "Alex Rivet", role: "CTO, Nexus", text: "The Spring Boot integration is flawless. Speed is unmatched across our entire stack.", img: "https://i.pravatar.cc/150?u=1" },
-    { name: "Sarah Chen", role: "Founder, Bloom", text: "Cylraweb transformed our Shopify store into a high-tech ecosystem. Conversion is up 30%.", img: "https://i.pravatar.cc/150?u=2" },
-    { name: "Marcus Thorne", role: "Lead Dev, Arca", text: "The AI implementation using Gemini is actually intelligent, not just a script.", img: "https://i.pravatar.cc/150?u=3" },
-    { name: "Elena Rossi", role: "Product Manager", text: "Beautifully designed UI with a backend that handles everything we throw at it.", img: "https://i.pravatar.cc/150?u=4" },
-    { name: "Julian Vane", role: "CEO, Vane Media", text: "Scalability was our priority, and they delivered a 99.9% uptime architecture.", img: "https://i.pravatar.cc/150?u=5" },
-    { name: "Sofia Gupta", role: "Tech Lead", text: "The cleanest React code I've seen in years. Truly professional engineering.", img: "https://i.pravatar.cc/150?u=6" },
+    { name: "Alex Rivet", role: "CTO, Nexus", text: "The Spring Boot integration is flawless. Speed is unmatched across our entire stack.", img: "https://ui-avatars.com/api/?name=Alex+Rivet&background=0D8ABC&color=fff" },
+    { name: "Sarah Chen", role: "Founder, Bloom", text: "Cylraweb transformed our Shopify store into a high-tech ecosystem. Conversion is up 30%.", img: "https://ui-avatars.com/api/?name=Sarah+Chen&background=0D8ABC&color=fff" },
+    { name: "Marcus Thorne", role: "Lead Dev, Arca", text: "The AI implementation using Gemini is actually intelligent, not just a script.", img: "https://ui-avatars.com/api/?name=Marcus+Thorne&background=0D8ABC&color=fff" },
+    { name: "Elena Rossi", role: "Product Manager", text: "Beautifully designed UI with a backend that handles everything we throw at it.", img: "https://ui-avatars.com/api/?name=Elena+Rossi&background=0D8ABC&color=fff" },
+    { name: "Julian Vane", role: "CEO, Vane Media", text: "Scalability was our priority, and they delivered a 99.9% architecture.", img: "https://ui-avatars.com/api/?name=Julian+Vane&background=0D8ABC&color=fff" },
+    { name: "Sofia Gupta", role: "Tech Lead", text: "The cleanest React code I've seen in years. Truly professional engineering.", img: "https://ui-avatars.com/api/?name=Sofia+Gupta&background=0D8ABC&color=fff" },
   ];
 
   const techStack = [
@@ -84,12 +88,12 @@ export default function Home({ theme }) {
   ];
 
   const workHighlights = [
-    { name: 'Doppelganger Finder', tag: 'Supabase • Cloud API', link: 'https://doppelganger.world/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642800/Untitled1_egi96v.png' },
-    { name: 'AI Email Gen', tag: 'Spring Boot • Gemini', link: 'https://coruscating-beijinho-edb225.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642800/Untitled2_malquj.png' },
-    { name: 'Spotify UI', tag: 'CSS Grid • Logic', link: 'https://umeshjonwal.github.io/spotify-clone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642802/Untitled3_bhqxx8.png' },
-    { name: 'Miranda Clone', tag: 'Motion Design', link: 'https://umeshjonwal.github.io/mirandaclone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642802/Untitled4_f7khzo.png' },
-    { name: 'Narmata Project', tag: 'Semantic UI', link: 'https://umeshjonwal.github.io/narmataproject/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642804/Untitled5_kycoja.png' },
-    { name: 'Clyra World', tag: 'React • Netlify', link: 'https://clyraworld.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/f_auto,q_auto,w_800/v1771642802/Untitled6_hj7ico.png' }
+    { name: 'Doppelganger Finder', tag: 'Supabase • Cloud API', link: 'https://doppelganger.world/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled1_egi96v.png' },
+    { name: 'AI Email Gen', tag: 'Spring Boot • Gemini', link: 'https://coruscating-beijinho-edb225.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled2_malquj.png' },
+    { name: 'Spotify UI', tag: 'CSS Grid • Logic', link: 'https://umeshjonwal.github.io/spotify-clone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled3_bhqxx8.png' },
+    { name: 'Miranda Clone', tag: 'Motion Design', link: 'https://umeshjonwal.github.io/mirandaclone/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled4_f7khzo.png' },
+    { name: 'Narmata Project', tag: 'Semantic UI', link: 'https://umeshjonwal.github.io/narmataproject/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256804/Untitled5_kycoja.png' },
+    { name: 'Clyra World', tag: 'React • Netlify', link: 'https://clyraworld.netlify.app/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256802/Untitled6_hj7ico.png' }
   ];
 
   const pricingPlans = [
@@ -113,18 +117,15 @@ export default function Home({ theme }) {
         <div className="grid lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-7 lg:sticky lg:top-32">
             <SectionBadge theme={theme}>Full-Stack AI Engineering</SectionBadge>
-            <motion.h1 
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className={`text-7xl md:text-[8.5rem] font-black leading-[0.8] tracking-tighter mb-10 
-                ${isDark ? 'text-white' : 'text-slate-900'}`}
-            >
+            
+            <h1 className={`text-7xl md:text-[8.5rem] font-black leading-[0.8] tracking-tighter mb-10 
+                ${isDark ? 'text-white' : 'text-slate-900'}`}>
               WEAVE<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-500 italic">
                 THE FUTURE.
               </span>
-            </motion.h1>
+            </h1>
+
             <p className={`text-xl max-w-xl mb-12 leading-relaxed font-medium 
               ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
               Cylraweb integrates <strong>Spring Boot</strong> backends with <strong>React</strong> frontends. 
@@ -141,8 +142,9 @@ export default function Home({ theme }) {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="metadata" crossOrigin="anonymous" className="w-full h-full object-cover opacity-60">
-                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642770/abrhr9zpfjt1ymmnfcf9_iqrtgi.jpg" type="video/mp4" />
+                  {/* Fixed Video Source & Error Prevention */}
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover opacity-60">
+                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/q_auto,vc_h264/v1740256770/abrhr9zpfjt1ymmnfcf9_iqrtgi.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
@@ -151,10 +153,11 @@ export default function Home({ theme }) {
                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400">Neural Architecture</p>
                 </div>
             </SpatialCard>
+
             <SpatialCard theme={theme} className="aspect-[16/10] w-full">
                 <div className="absolute inset-0 z-0 bg-slate-900">
-                  <video autoPlay muted loop playsInline preload="metadata" crossOrigin="anonymous" className="w-full h-full object-cover opacity-60">
-                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/f_auto:video,q_auto,vc_vp9/v1771642764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.jpg" type="video/mp4" />
+                  <video autoPlay muted loop playsInline preload="auto" className="w-full h-full object-cover opacity-60">
+                    <source src="https://res.cloudinary.com/douc8uat5/video/upload/q_auto,vc_h264/v1740256764/Untitled_video_-_Made_with_Clipchamp_11_r5x4jj.mp4" type="video/mp4" />
                   </video>
                 </div>
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 to-transparent" />
@@ -178,13 +181,13 @@ export default function Home({ theme }) {
                 ${isDark ? 'bg-white/5 border-white/5 hover:border-blue-500/40' : 'bg-slate-50 border-black/5 hover:border-blue-600/20'}`}>
                 <div className="h-48 overflow-hidden bg-slate-800">
                   <img 
-                    src={project.img} 
+                    src={optimizeCloudinary(project.img, 600)} 
                     alt={project.name} 
                     loading="lazy" 
-                    crossOrigin="anonymous"
-                    width="800"
-                    height="424"
+                    width="600"
+                    height="318"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                    onError={(e) => { e.target.src = "https://placehold.co/600x400?text=Project+Coming+Soon"; }}
                   />
                 </div>
                 <div className="p-8">
@@ -219,7 +222,7 @@ export default function Home({ theme }) {
               >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center space-x-4">
-                    <img src={rev.img} alt="" loading="lazy" crossOrigin="anonymous" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
+                    <img src={rev.img} alt="" loading="lazy" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-blue-500/30" />
                     <div>
                       <h3 className="font-black text-base tracking-tight">{rev.name}</h3>
                       <p className="text-[10px] text-blue-500 font-black uppercase tracking-widest">{rev.role}</p>
@@ -257,7 +260,6 @@ export default function Home({ theme }) {
                     src={tech.custom || `https://cdn.simpleicons.org/${tech.l}`} 
                     alt={`${tech.n} logo`} 
                     loading="lazy" 
-                    crossOrigin="anonymous"
                     width="48"
                     height="48"
                     className="w-12 h-12 object-contain relative z-10" 
