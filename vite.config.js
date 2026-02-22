@@ -1,40 +1,46 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import compression from 'vite-plugin-compression'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   plugins: [
     react(),
-    // Generates .gz files; Cloudflare/Netlify will serve these automatically
+    // Compression for high performance serving
     compression({
       algorithm: 'gzip',
       ext: '.gz',
+    }),
+    // Generates a visual map of your bundle sizes
+    visualizer({
+      filename: 'bundle-stats.html',
+      open: false, // Set to true if you want it to pop up after every build
+      gzipSize: true,
+      template: 'treemap' // Best for identifying large dependencies
     })
   ],
   build: {
-    // 1. Minification strategy
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true, // Removes console.logs for production performance
+        drop_console: true,
         drop_debugger: true,
       },
     },
-    // 2. Splitting the "Vendor" (Libraries) from your "App" code
     rollupOptions: {
       output: {
+        // Advanced Code Splitting Strategy
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            // Group heavy libraries into their own chunks
             if (id.includes('framer-motion')) return 'vendor-motion';
             if (id.includes('lucide-react')) return 'vendor-icons';
             if (id.includes('@formspree')) return 'vendor-forms';
-            return 'vendor'; // everything else
+            return 'vendor-core'; 
           }
         },
       },
     },
-    // 3. Prevent small files from being inlined as Base64 (improves caching)
+    // Ensure separate files for better caching/CDN performance
     assetsInlineLimit: 0, 
     chunkSizeWarningLimit: 600,
   },

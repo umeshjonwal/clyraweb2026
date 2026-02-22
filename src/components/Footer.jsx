@@ -6,9 +6,10 @@ import { Instagram, Twitter, Linkedin, Github, Code2 } from "lucide-react";
 export default function Footer({ theme }) {
   const isDark = theme === 'dark';
 
-  // Performance Fix: Using more standard slate colors for WCAG AA contrast
+  // Performance & Accessibility Fix: 
+  // Increased contrast for labels in both modes to ensure readability.
   const labelStyle = `text-[11px] font-black uppercase tracking-[0.4em] mb-10 ${
-    isDark ? 'text-slate-200' : 'text-slate-700'
+    isDark ? 'text-white' : 'text-slate-900'
   }`;
 
   return (
@@ -20,7 +21,8 @@ export default function Footer({ theme }) {
           
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-10">
-              <a href="https://cylraweb.com" className="flex items-center space-x-3 group" aria-label="Cylraweb Home">
+              {/* SEO Fix: Changed label to differentiate from text links to the same domain */}
+              <a href="https://cylraweb.com" className="flex items-center space-x-3 group" aria-label="Cylraweb Corporate Home">
                 <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/20">C</div>
                 <span className={`text-3xl font-black uppercase tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>Cylraweb</span>
               </a>
@@ -41,7 +43,7 @@ export default function Footer({ theme }) {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Follow us on ${label}`} // Accessibility Fix
+                  aria-label={`Visit our ${label} page`} 
                   whileHover={{ y: -5 }} 
                   className={`p-4 rounded-2xl border transition-all ${
                     isDark ? 'bg-white/5 border-white/20 text-white hover:border-blue-500' : 'bg-white border-black/10 text-slate-600 hover:text-blue-600'
@@ -56,7 +58,7 @@ export default function Footer({ theme }) {
           <div>
             <p className={labelStyle}>Company</p>
             <nav aria-label="Footer Sitemap">
-              <ul className={`space-y-4 text-sm font-bold ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+              <ul className={`space-y-4 text-sm font-bold ${isDark ? 'text-slate-200' : 'text-slate-700'}`}>
                 <li><a href="https://cylraweb.com/work" className="hover:text-blue-600 transition-colors">Our Portfolio</a></li>
                 <li><a href="https://cylraweb.com/services" className="hover:text-blue-600 transition-colors">Core Services</a></li>
                 <li><a href="https://cylraweb.com/contact" className="hover:text-blue-600 transition-colors">Join Us</a></li>
@@ -66,6 +68,7 @@ export default function Footer({ theme }) {
 
           <div>
             <p className={labelStyle}>Keep Pace</p>
+            {/* The SubscribeForm contrast fix should be handled within that component's input field */}
             <SubscribeForm theme={theme} idPrefix="footer" />
           </div>
         </div>
@@ -76,12 +79,21 @@ export default function Footer({ theme }) {
           <div className="space-y-4">
              <div className="flex flex-col gap-1">
                 <p>© {new Date().getFullYear()} CYLRA CONSULTANCY SERVICES.</p>
-                <p className="opacity-100">EST. 2024 — NEW DELHI, IN</p> {/* Accessibility Fix: Removed low opacity */}
+                {/* Accessibility Fix: Ensure text opacity is 100% for readability against dark backgrounds */}
+                <p className="opacity-100 font-bold">EST. 2024 — NEW DELHI, IN</p>
              </div>
              
              <div className={`flex items-center space-x-2 py-2 px-4 rounded-full border w-fit ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/5'}`}>
                 <Code2 size={12} className="text-blue-600" />
-                <span>Engineered by <a href="https://www.linkedin.com/in/javawithumesh" target="_blank" rel="noreferrer" className={`hover:text-blue-600 transition-colors ${isDark ? 'text-white' : 'text-black'}`}>Umesh Jonwal</a></span>
+                <span>
+                  Engineered by{' '}
+                  <a 
+  href="https://www.linkedin.com/in/javawithumesh" 
+  className="text-white hover:text-blue-400 transition-colors border-b border-transparent hover:border-blue-400 pb-0.5"
+>
+  UMESH JONWAL
+</a>
+                </span>
              </div>
           </div>
 

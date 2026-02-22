@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
-    <link rel="preconnect" href="https://res.cloudinary.com" />
-    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7ZYTYHGX23"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-7ZYTYHGX23", { 'animate_speed': 'high' });
-      gtag("config", "G-SYVGVW9HL5");
-    </script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
-    <title>Clyraweb — Custom AI & Web Development Agency</title>
-    <meta name="description" content="Clyraweb is a premier digital consultancy building high-performance AI-powered websites, web apps, and custom software for modern enterprises." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://cylraweb.com/" />
-    <meta name="google-site-verification" content="JKwC6RhXkiXwnkbKAZB2dS_t90qR5JvTLlWNrusFFH8" />
+  <link rel="preconnect" href="https://res.cloudinary.com" />
+  <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Clyraweb — Custom AI & Web Development Agency" />
-    <meta property="og:description" content="Impact through experience. Building the next generation of AI-integrated digital solutions." />
-    <meta property="og:url" content="https://cylraweb.com/" />
-    <meta property="og:site_name" content="Clyraweb" />
-    <meta property="og:image" content="https://cylraweb.com/og-image.jpg" />
+  <link rel="preload" href="/fonts/Inter-Black.woff2" as="font" type="font/woff2" crossorigin />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Clyraweb — AI & Web Development" />
-    <meta name="twitter:description" content="Clyraweb builds elite digital products for startups and enterprises." />
+  <script>
+    window.partytown = {
+      lib: "/~partytown/",
+      forward: ["dataLayer.push"]
+    };
+  </script>
 
-    <script type="application/ld+json">
+  <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-7ZYTYHGX23"></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7ZYTYHGX23', { 'animate_speed': 'high' });
+    gtag('config', 'G-SYVGVW9HL5');
+  </script>
+
+  <title>Clyraweb — Custom AI & Web Development Agency</title>
+  <meta name="description"
+    content="Clyraweb is a premier digital consultancy building high-performance AI-powered websites, web apps, and custom software for modern enterprises." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://cylraweb.com/" />
+  <meta name="google-site-verification" content="JKwC6RhXkiXwnkbKAZB2dS_t90qR5JvTLlWNrusFFH8" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Clyraweb — Custom AI & Web Development Agency" />
+  <meta property="og:description"
+    content="Impact through experience. Building the next generation of AI-integrated digital solutions." />
+  <meta property="og:url" content="https://cylraweb.com/" />
+  <meta property="og:site_name" content="Clyraweb" />
+  <meta property="og:image" content="https://cylraweb.com/og-image.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Clyraweb — AI & Web Development" />
+  <meta name="twitter:description" content="Clyraweb builds elite digital products for startups and enterprises." />
+
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -59,19 +70,20 @@
     }
     </script>
 
-    <link rel="icon" href="/public_favicon.svg" type="image/svg+xml" />
-  </head>
+  <link rel="icon" href="/public_favicon.svg" type="image/svg+xml" />
+</head>
 
-  <body class="bg-white text-slate-900 dark:bg-[#020205] dark:text-slate-100 antialiased">
-    <noscript>
-      <div style="padding: 20px; text-align: center;">
-        <h1>Clyraweb — High Performance AI & Web Development</h1>
-        <p>Please enable JavaScript to view our full experience.</p>
-      </div>
-    </noscript>
+<body class="bg-white text-slate-900 dark:bg-[#020205] dark:text-slate-100 antialiased">
+  <noscript>
+    <div style="padding: 20px; text-align: center;">
+      <h1 style="font-family: sans-serif;">Clyraweb — High Performance AI & Web Development</h1>
+      <p>Please enable JavaScript to view our full experience.</p>
+    </div>
+  </noscript>
 
-    <div id="root"></div>
+  <div id="root"></div>
 
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
