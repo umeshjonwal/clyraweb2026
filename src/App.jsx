@@ -46,20 +46,17 @@ export default function App() {
 
   const Page = useMemo(() => routes[path] || Home, [path]);
 
-  // --- 1. Corrected Font Injection ---
-  // Ensuring the path is absolute and points to the fonts subdirectory
+  // --- 1. Font Injection ---
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
       @font-face {
         font-family: 'Inter';
-        /* The path must include /fonts/ to match your structure */
         src: url('/fonts/Inter-Variable.woff2') format('woff2');
         font-weight: 100 900;
         font-display: swap;
         font-style: normal;
       }
-
       :root {
         font-family: 'Inter', system-ui, sans-serif;
       }
@@ -88,7 +85,6 @@ export default function App() {
       if (!link) return;
       const href = link.getAttribute("href");
       
-      // Filter out external links and anchors
       if (!href || href.startsWith("http") || href.startsWith("#") || href.includes(":")) return;
 
       e.preventDefault();
@@ -116,7 +112,7 @@ export default function App() {
         antialiased
       "
     >
-      {/* Neural Glow Layer - Background Ambience */}
+      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div 
           className="absolute top-[-25%] left-[-25%] w-[150%] h-[150%] opacity-20 dark:opacity-10 blur-[120px] animate-[spin_60s_linear_infinite]"
@@ -126,7 +122,6 @@ export default function App() {
         />
       </div>
 
-      {/* Spatial/3D Engine (Disabled on low-end devices for speed) */}
       {!isLowEnd && <SpatialRoot pathname={path} />}
 
       <Nav theme={theme} setTheme={setTheme} />
@@ -135,7 +130,10 @@ export default function App() {
       
       <WhatsAppFloat phone="919911274711" />
 
-      <main key={path} className="relative z-10 pt-28 reveal">
+      {/* FIXED: Changed pt-28 to pt-12. 
+          This removes the massive empty gap between the Nav/Hero and the Page content.
+      */}
+      <main key={path} className="relative z-10 pt-12 reveal">
         <Page theme={theme} />
       </main>
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { useForm, ValidationError } from "@formspree/react";
-import { Send, CheckCircle2, Loader2, Sparkles, ChevronDown } from 'lucide-react';
+import { Send, CheckCircle2, Loader2, Sparkles, ChevronDown, Phone } from 'lucide-react';
 
 export default function Contact({ theme }) {
-  const [state, handleSubmit] = useForm("xovnrwll");
+  const [state, handleSubmit] = useForm("xqedjekr");
   const isDark = theme === 'dark';
 
   const inputStyles = `
@@ -14,7 +14,7 @@ export default function Contact({ theme }) {
       : 'bg-black/5 border-black/10 text-slate-900 focus:border-blue-600 focus:bg-white'}
   `;
 
-  const labelStyles = `text-[10px] font-black uppercase tracking-[0.2em] mb-2 block 
+  const labelStyles = `text-[10px] font-black uppercase tracking-[0.2em] mb-2 flex items-center gap-2
     ${isDark ? 'text-slate-300' : 'text-slate-600'}`;
 
   const optionStyles = isDark 
@@ -61,55 +61,32 @@ export default function Contact({ theme }) {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label htmlFor="contact-name" className={labelStyles}>Operator Name</label>
-            <input
-              id="contact-name"
-              type="text"
-              name="name"
-              className={inputStyles}
-              placeholder="Full Name"
-              required
-            />
-            <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-500 text-xs mt-1" />
+            <label htmlFor="name" className={labelStyles}>Operator Name</label>
+            <input id="name" type="text" name="name" className={inputStyles} placeholder="Full Name" required />
+            <ValidationError prefix="Name" field="name" errors={state.errors} />
           </div>
-
           <div className="space-y-2">
-            <label htmlFor="contact-email" className={labelStyles}>Email Address</label>
-            <input
-              id="contact-email"
-              type="email"
-              name="email"
-              className={inputStyles}
-              placeholder="email@provider.com"
-              required
-            />
-            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
+            <label htmlFor="email" className={labelStyles}>Email Address</label>
+            <input id="email" type="email" name="email" className={inputStyles} placeholder="email@provider.com" required />
+            <ValidationError prefix="Email" field="email" errors={state.errors} />
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-2 relative">
-            <label htmlFor="contact-plan" className={labelStyles}>Selected Architecture</label>
-            <select id="contact-plan" name="plan" className={inputStyles} defaultValue="" required>
-              <option value="" disabled style={optionStyles}>Choose a Plan</option>
-              <option value="Basic Node" style={optionStyles}>Basic Node (₹4,999)</option>
-              <option value="Premium Suite" style={optionStyles}>Premium Suite (₹7,999)</option>
-              <option value="AI Evolution" style={optionStyles}>AI Evolution (₹9,999)</option>
-              <option value="Shopify Edge" style={optionStyles}>Shopify Edge (₹14,999)</option>
-              <option value="Custom Enterprise" style={optionStyles}>Custom Enterprise (₹15,999)</option>
-              <option value="Real Estate Pro" style={optionStyles}>Real Estate Pro (₹25,999)</option>
-            </select>
-            <div className="absolute right-5 bottom-4 pointer-events-none opacity-50">
-              <ChevronDown size={16} className={isDark ? 'text-white' : 'text-black'} />
-            </div>
+          <div className="space-y-2">
+            <label htmlFor="whatsapp" className={labelStyles}>WhatsApp Contact</label>
+            <input id="whatsapp" type="tel" name="whatsapp" className={inputStyles} placeholder="+91 00000-00000" required />
           </div>
-
           <div className="space-y-2 relative">
-            <label htmlFor="contact-timeline" className={labelStyles}>Timeline</label>
-            <select id="contact-timeline" name="timeline" className={inputStyles} defaultValue="Standard">
-              <option value="Urgent" style={optionStyles}>Urgent (Within 1 week)</option>
-              <option value="Standard" style={optionStyles}>Standard (2-4 weeks)</option>
-              <option value="Flexible" style={optionStyles}>Flexible</option>
+            <label htmlFor="plan" className={labelStyles}>Selected Architecture</label>
+            <select id="plan" name="plan" className={inputStyles} defaultValue="" required>
+              <option value="" disabled style={optionStyles}>Choose a Plan</option>
+              <option value="Basic Plan" style={optionStyles}>Basic Plan (₹7,800)</option>
+              <option value="Classic Plan" style={optionStyles}>Classic Plan (₹8,800)</option>
+              <option value="Premium Plan" style={optionStyles}>Premium Plan (₹14,300)</option>
+              <option value="Shopify Edge" style={optionStyles}>Shopify E-commerce (₹9,999)</option>
+              <option value="Real Estate Pro" style={optionStyles}>Real Estate Pro (₹5,999)</option>
+              <option value="Custom Enterprise" style={optionStyles}>Custom/Enterprise</option>
             </select>
             <div className="absolute right-5 bottom-4 pointer-events-none opacity-50">
               <ChevronDown size={16} className={isDark ? 'text-white' : 'text-black'} />
@@ -118,38 +95,21 @@ export default function Contact({ theme }) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="contact-message" className={labelStyles}>Mission Brief</label>
-          <textarea
-            id="contact-message"
-            name="message"
-            rows="4"
-            className={`${inputStyles} resize-none`}
-            placeholder="Tell us about your goals..."
-            required
-          />
-          <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-xs mt-1" />
+          <label htmlFor="message" className={labelStyles}>Mission Brief</label>
+          <textarea id="message" name="message" rows="4" className={`${inputStyles} resize-none`} placeholder="Tell us about your requirements..." required />
+          <ValidationError prefix="Message" field="message" errors={state.errors} />
         </div>
 
         <motion.button
+          type="submit"
+          disabled={state.submitting}
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.98 }}
-          disabled={state.submitting}
           className={`w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center space-x-3 transition-all
-            ${state.submitting 
-              ? 'bg-slate-800 text-slate-500 cursor-not-allowed' 
-              : 'bg-blue-600 text-white shadow-xl shadow-blue-500/25 hover:bg-blue-500'}`}
+            ${state.submitting ? 'bg-slate-800 text-slate-500' : 'bg-blue-600 text-white shadow-xl shadow-blue-500/25'}`}
         >
-          {state.submitting ? (
-            <>
-              <Loader2 size={16} className="animate-spin" />
-              <span>Transmitting...</span>
-            </>
-          ) : (
-            <>
-              <Send size={16} />
-              <span>Launch Inquiry</span>
-            </>
-          )}
+          {state.submitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+          <span>{state.submitting ? 'Transmitting...' : 'Launch Inquiry'}</span>
         </motion.button>
       </form>
     </div>

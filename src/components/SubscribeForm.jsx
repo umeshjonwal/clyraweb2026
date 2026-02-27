@@ -1,59 +1,31 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { useForm, ValidationError } from "@formspree/react";
+import { Send, Loader2, CheckCircle2 } from "lucide-react";
 
 export default function SubscribeForm({ theme, idPrefix }) {
+  const [state, handleSubmit] = useForm("xqedjeer");
   const isDark = theme === 'dark';
   const inputId = `${idPrefix}-email-input`;
 
+  if (state.succeeded) {
+    return (
+      <div className={`flex items-center space-x-3 p-4 rounded-2xl border ${isDark ? 'bg-blue-500/10 border-blue-500/20' : 'bg-blue-50 border-blue-200'}`}>
+        <CheckCircle2 size={18} className="text-blue-500" />
+        <span className="text-[10px] font-black uppercase tracking-widest">Node Active</span>
+      </div>
+    );
+  }
+
   return (
     <div className="relative group max-w-sm">
-      {/* Accessibility: Enhanced sr-only label for Screen Readers */}
-      <label htmlFor={inputId} className="sr-only">
-        Email address for newsletter
-      </label>
-      
-      <form 
-        onSubmit={(e) => e.preventDefault()}
-        className={`relative flex items-center p-2 rounded-2xl border transition-all duration-300 ${
-          isDark 
-            ? 'bg-white/5 border-white/10 focus-within:border-blue-500/50 focus-within:bg-white/10' 
-            : 'bg-white border-slate-200 focus-within:border-blue-600 focus-within:shadow-xl focus-within:shadow-blue-500/10'
-        }`}
-      >
-        <input
-          id={inputId}
-          type="email"
-          placeholder="Enter your email"
-          required
-          autoComplete="email"
-          className={`bg-transparent pl-4 pr-14 py-3 w-full focus:outline-none text-sm font-medium transition-colors ${
-            isDark 
-              ? 'text-white placeholder:text-slate-400' 
-              : 'text-slate-900 placeholder:text-slate-500' 
-          }`}
-        />
-        
-        <motion.button
-          type="submit"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          aria-label="Subscribe to newsletter"
-          title="Subscribe"
-          className="absolute right-2 p-3 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-500/30 hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent focus:outline-none transition-all"
-        >
-          <Send size={16} aria-hidden="true" />
+      <form onSubmit={handleSubmit} className={`relative flex items-center p-2 rounded-2xl border transition-all duration-300 ${isDark ? 'bg-white/5 border-white/10 focus-within:bg-white/10' : 'bg-white border-slate-200 focus-within:shadow-xl'}`}>
+        <input id={inputId} type="email" name="email" placeholder="Enter your email" required className={`bg-transparent pl-4 pr-14 py-3 w-full focus:outline-none text-sm font-medium ${isDark ? 'text-white' : 'text-slate-900'}`} />
+        <motion.button type="submit" disabled={state.submitting} className="absolute right-2 p-3 bg-blue-600 text-white rounded-xl shadow-lg">
+          {state.submitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
         </motion.button>
       </form>
-
-      {/* Performance & CLS: Reserved space with better contrast */}
-      <div className="h-4 mt-2 overflow-hidden">
-        <p className={`text-[10px] font-black uppercase tracking-[0.15em] opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 ${
-          isDark ? 'text-blue-400' : 'text-blue-700'
-        }`}>
-          Encrypted Transmission.
-        </p>
-      </div>
+      <ValidationError prefix="Email" field="email" errors={state.errors} className="text-[10px] text-red-500 mt-2 block" />
     </div>
   );
 }
