@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Users, Zap, Eye, Globe, 
-  Target, ShieldCheck, Cpu, MessageSquare 
+  Target, ShieldCheck, Cpu, MessageSquare, Send 
 } from 'lucide-react';
 
 // --- Spatial Manifesto Card ---
@@ -138,7 +138,7 @@ export default function About({ theme }) {
                 className="w-48 h-48 border-2 border-dashed border-blue-500/20 rounded-full flex items-center justify-center"
             >
                 <div className="w-32 h-32 border-2 border-blue-500/40 rounded-full flex items-center justify-center">
-                    <div className="w-16 h-16 bg-blue-600 rounded-full shadow-2xl shadow-blue-500/50 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full shadow-2xl shadow-blue-500/5 flex items-center justify-center">
                         <Users className="text-white" />
                     </div>
                 </div>
@@ -149,7 +149,7 @@ export default function About({ theme }) {
         </div>
       </section>
 
-      {/* --- Simple Footer CTA --- */}
+      {/* --- Footer CTA --- */}
       <div className={`rounded-[3rem] p-12 text-center border relative overflow-hidden
         ${isDark ? 'bg-blue-600/5 border-blue-500/20' : 'bg-blue-50 border-blue-100'}`}>
         <h3 className={`text-3xl font-black mb-4 ${isDark ? 'text-white' : 'text-slate-900'}`}>
@@ -159,9 +159,18 @@ export default function About({ theme }) {
           We only take on 3 projects at a time to maintain our standard of quality. 
           Check our current availability.
         </p>
-        <button className="px-10 py-4 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20">
-          Inquire Availability
-        </button>
+        
+        <motion.a 
+          href="/contact"
+          whileHover={{ y: -3, scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="group relative inline-flex items-center justify-center px-10 py-5 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/25 cursor-pointer"
+        >
+          <span className="relative flex items-center gap-2">
+            Inquire Availability
+            <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </span>
+        </motion.a>
       </div>
       
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { ArrowUpRight, BookOpen, Clock, Terminal, Mail } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Clock, Terminal, Mail, Send } from 'lucide-react';
 
 // --- Reusable Spatial Logic ---
 const SpatialCard = ({ children, className = "", theme }) => {
@@ -153,21 +153,18 @@ export default function Blog({ theme }) {
             Join the technical brief. No spam, just high-fidelity audits and design engineering trends delivered to your terminal.
           </p>
           
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1 group">
-                <input 
-                    type="email" 
-                    placeholder="operator@network.com" 
-                    className={`w-full px-6 py-5 rounded-2xl text-sm font-bold border outline-none transition-all
-                        ${isDark 
-                            ? 'bg-black/40 border-white/10 text-white focus:border-blue-500 focus:bg-black/60' 
-                            : 'bg-white border-black/10 text-slate-900 focus:border-blue-600 shadow-inner'}`}
-                />
-            </div>
-            <button className="px-10 py-5 bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/30 whitespace-nowrap active:scale-95">
+          {/* Updated Button referring to contact.jsx */}
+          <motion.a 
+            href="/contact"
+            whileHover={{ y: -3, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative inline-flex items-center justify-center px-10 py-5 bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/30 whitespace-nowrap cursor-pointer"
+          >
+            <span className="relative flex items-center gap-2">
               Initialize Subscription
-            </button>
-          </form>
+              <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </span>
+          </motion.a>
           
           <p className={`mt-6 text-[10px] font-bold uppercase tracking-widest ${isDark ? 'text-slate-600' : 'text-slate-400'}`}>
             SECURE TRANSMISSION • NO VENDOR LOCK-IN • ASYNC UPDATES

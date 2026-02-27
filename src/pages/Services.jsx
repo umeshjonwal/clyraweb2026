@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   Compass, Code2, Rocket, BrainCircuit, 
-  Layers, ChevronRight, Activity, Gauge 
+  Layers, ChevronRight, Activity, Gauge, Send 
 } from 'lucide-react';
 import ResponsiveTable from '../components/ResponsiveTable.jsx';
 
@@ -79,7 +79,6 @@ export default function Services({ theme }) {
       </section>
 
       {/* --- Service Capabilities Grid --- */}
-      
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {serviceData.map((service, i) => (
           <ServiceCard key={i} {...service} theme={theme} />
@@ -114,7 +113,7 @@ export default function Services({ theme }) {
           <ResponsiveTable 
             columns={columns} 
             rows={rows} 
-            theme={theme} // Passing theme to handle internal table styling
+            theme={theme} 
           />
         </div>
       </section>
@@ -129,9 +128,19 @@ export default function Services({ theme }) {
           We build bespoke solutions for enterprise-level requirements. Let's draft a 
           technical brief tailored specifically to your infrastructure.
         </p>
-        <button className="px-10 py-4 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20">
-          Book Technical Discovery
-        </button>
+        
+        {/* Updated Button using standard Anchor tag to avoid React-Router errors */}
+        <motion.a 
+          href="/contact"
+          whileHover={{ y: -3, scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="group relative inline-flex items-center justify-center px-10 py-5 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/25 cursor-pointer"
+        >
+          <span className="relative flex items-center gap-2">
+            Book Technical Discovery
+            <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </span>
+        </motion.a>
       </div>
       
     </div>
