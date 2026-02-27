@@ -123,14 +123,14 @@ export default function Work({ theme }) {
       tech: 'React • Tailwind • Framer Motion',
       desc: 'Premium home service platform featuring a modern grid layout and smooth scrolling animations for enhanced user conversion.',
       link: 'https://a2zhome.netlify.app/',
-      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_142914_r53erk.jpg',
+      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_142804_j9036g.jpg',
     },
     {
       name: 'Onzy Portfolio',
       tech: 'React • Vite • Responsive Design',
       desc: 'Minimalist creative portfolio showcasing high-end typography and interactive UI components optimized for all devices.',
       link: 'https://onzy.netlify.app/',
-      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_143057_i00vz2.jpg',
+      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_142914_r53erk.jpg',
     },
     {
       name: 'Chroma Visuals',
@@ -158,7 +158,7 @@ export default function Work({ theme }) {
       tech: 'React • Lucide Icons • CSS Modules',
       desc: 'Healthcare management interface prioritizing data visualization and user-friendly navigation for medical professionals.',
       link: 'https://akashhealth-com.netlify.app/',
-      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_142804_j9036g.jpg',
+      img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_143057_i00vz2.jpg',
     },
     {
       name: 'Doppelganger Finder',

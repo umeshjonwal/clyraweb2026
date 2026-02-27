@@ -447,12 +447,12 @@
     // --- COMBINED WORK REGISTRY (ALL 12 PROJECTS) ---
     const allProjects = [
       // New Projects
-      { name: 'A2Z Home Solutions', tag: 'React • Tailwind', link: 'https://a2zhome.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_142914_r53erk.jpg' },
-      { name: 'Onzy Portfolio', tag: 'Vite • Responsive', link: 'https://onzy.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_143057_i00vz2.jpg' },
+      { name: 'A2Z Home Solutions', tag: 'React • Tailwind', link: 'https://a2zhome.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_142804_j9036g.jpg' },
+      { name: 'Onzy Portfolio', tag: 'Vite • Responsive', link: 'https://onzy.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_142914_r53erk.jpg' },
       { name: 'Chroma Visuals', tag: 'GSAP • Animations', link: 'https://chroma-com.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_142947_fe9rdf.jpg' },
       { name: 'Manly Grooming', tag: 'ReactJS • UI/UX', link: 'https://manly-com.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_143002_jndg3u.jpg' },
       { name: 'US Education Portal', tag: 'Web Vitals • Tailwind', link: 'https://us-education-com.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_143016_xawwln.jpg' },
-      { name: 'Akash Health Tech', tag: 'React • Lucide Icons', link: 'https://akashhealth-com.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182884/Screenshot_2026-02-27_142804_j9036g.jpg' },
+      { name: 'Akash Health Tech', tag: 'React • Lucide Icons', link: 'https://akashhealth-com.netlify.app/', img: 'https://res.cloudinary.com/dwhlv0yog/image/upload/v1772182885/Screenshot_2026-02-27_143057_i00vz2.jpg' },
       
       // Original Projects
       { name: 'Doppelganger Finder', tag: 'Supabase • Cloud API', link: 'https://doppelganger.world/', img: 'https://res.cloudinary.com/douc8uat5/image/upload/v1740256800/Untitled1_egi96v.jpg' },
